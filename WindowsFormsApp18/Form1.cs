@@ -9,6 +9,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Data.OleDb;
 
+/*Important: In case of an 12.0 error, download Microsoft Access Database Engine Redistributable 2010.*/
+
 namespace WindowsFormsApp18
 {
     public partial class Form1 : Form
