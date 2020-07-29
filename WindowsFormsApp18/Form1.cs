@@ -13,6 +13,7 @@ namespace WindowsFormsApp18
 {
     public partial class Form1 : Form
     {
+       
 
         public Form1()
         {
@@ -30,39 +31,46 @@ namespace WindowsFormsApp18
             openFileDialog1.ShowDialog();
         }
 
-        /*private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
-        {
-            string csvFile = openFileDialog1.FileName;
-            List<string[]> rows = File.ReadAllLines(csvFile).Select(x => x.Split(',')).ToList();
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Year");
-            for (int i = 1; i <= 12; i++)
-                dt.Columns.Add("Month " + i);
-            rows.ForEach(x => { dt.Rows.Add(x); });
-            inputGrid.DataSource = dt;
-        }*/
+        /* TO DO : TRY/CATCH/EXCEPTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!OOOOOOOOOOOOOOOOOO  OOOOOOOOO*/
+        /* IN CASE YOU MISSED THE LINE ABOVE */
 
+
+        //Opens a dialog box to select Excel file 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             string excelFile = openFileDialog1.FileName;
-            DataTable dt = LoadWorksheetInDataTable(excelFile, "Sheet1");
+            DataTable dt = LoadWorksheetInDataTable(excelFile);
             inputGrid.DataSource = dt;
         }
 
-        private DataTable LoadWorksheetInDataTable(string fileName, string sheetName)
+        //Returns the Excel file data as a DataTable
+        private DataTable LoadWorksheetInDataTable(string fileName)
         {
             DataTable sheetData = new DataTable();
-            using (OleDbConnection conn = this.returnConnection(fileName))
+            string Sheet1;
+
+            //This section is to get the Sheet name.
+            using (OleDbConnection conn = this.returnConnection(fileName)) 
+            {
+                conn.Open();
+                DataTable dtSchema = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
+                Sheet1 = dtSchema.Rows[0].Field<string>("TABLE_NAME");
+                conn.Close();
+            }
+
+            //This section is to get the sheet data.
+            using (OleDbConnection conn = this.returnConnection(fileName)) 
             {
                 conn.Open();
                 // retrieve the data using data adapter
-                OleDbDataAdapter sheetAdapter = new OleDbDataAdapter("select * from [" + sheetName + "$]", conn);
+                OleDbDataAdapter sheetAdapter = new OleDbDataAdapter("select * from [" + Sheet1 + "]", conn);
                 sheetAdapter.Fill(sheetData);
                 conn.Close();
             }
             return sheetData;
         }
 
+        //Returns an object that represents a connection to MSOle component (Excel file).
         private OleDbConnection returnConnection(string fileName)
         {
             return new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties=\"Excel 12.0;HDR=No;\"");
