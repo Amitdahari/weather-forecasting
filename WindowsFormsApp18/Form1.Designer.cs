@@ -36,13 +36,13 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.groupBox_data = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.inputGrid = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.outputGrid = new System.Windows.Forms.DataGridView();
             this.groupBox_data.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputGrid)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.outputGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // choose_csv_button
@@ -98,7 +98,7 @@
             // 
             // groupBox_data
             // 
-            this.groupBox_data.Controls.Add(this.dataGridView1);
+            this.groupBox_data.Controls.Add(this.inputGrid);
             this.groupBox_data.Location = new System.Drawing.Point(25, 61);
             this.groupBox_data.Name = "groupBox_data";
             this.groupBox_data.Size = new System.Drawing.Size(796, 438);
@@ -106,17 +106,22 @@
             this.groupBox_data.TabStop = false;
             this.groupBox_data.Text = "Data ";
             // 
-            // dataGridView1
+            // inputGrid
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(73, 20);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(642, 412);
-            this.dataGridView1.TabIndex = 8;
+            this.inputGrid.AllowUserToAddRows = false;
+            this.inputGrid.AllowUserToDeleteRows = false;
+            this.inputGrid.AllowUserToResizeColumns = false;
+            this.inputGrid.AllowUserToResizeRows = false;
+            this.inputGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.inputGrid.Location = new System.Drawing.Point(73, 20);
+            this.inputGrid.Name = "inputGrid";
+            this.inputGrid.ReadOnly = true;
+            this.inputGrid.Size = new System.Drawing.Size(642, 412);
+            this.inputGrid.TabIndex = 8;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dataGridView2);
+            this.groupBox1.Controls.Add(this.outputGrid);
             this.groupBox1.Location = new System.Drawing.Point(25, 505);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(796, 170);
@@ -124,13 +129,13 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Results";
             // 
-            // dataGridView2
+            // outputGrid
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(73, 9);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(642, 150);
-            this.dataGridView2.TabIndex = 7;
+            this.outputGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.outputGrid.Location = new System.Drawing.Point(73, 9);
+            this.outputGrid.Name = "outputGrid";
+            this.outputGrid.Size = new System.Drawing.Size(642, 150);
+            this.outputGrid.TabIndex = 7;
             // 
             // Form1
             // 
@@ -148,9 +153,9 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox_data.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputGrid)).EndInit();
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.outputGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -166,9 +171,9 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.GroupBox groupBox_data;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView inputGrid;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView outputGrid;
     }
 }
 
