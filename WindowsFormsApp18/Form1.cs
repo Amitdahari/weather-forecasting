@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,9 +22,24 @@ namespace WindowsFormsApp18
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void choose_csv_button_Click(object sender, EventArgs e)
         {
-
+            openFileDialog1.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
+            openFileDialog1.ShowDialog();
         }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+            string csvFile = openFileDialog1.FileName;
+            List<string[]> rows = File.ReadAllLines(csvFile).Select(x => x.Split(',')).ToList();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Year");
+            for (int i = 1; i <= 12; i++)
+                dt.Columns.Add("Month " + i);
+            rows.ForEach(x => { dt.Rows.Add(x); });
+            dataGridView1.DataSource = dt;
+        }
+
+        
     }
 }

@@ -53,6 +53,7 @@
             this.choose_csv_button.TabIndex = 0;
             this.choose_csv_button.Text = "Browse";
             this.choose_csv_button.UseVisualStyleBackColor = true;
+            this.choose_csv_button.Click += new System.EventHandler(this.choose_csv_button_Click);
             // 
             // process_button
             // 
@@ -93,6 +94,7 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // groupBox_data
             // 
