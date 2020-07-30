@@ -86,9 +86,9 @@ namespace WindowsFormsApp18
             return new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties=\"Excel 12.0;HDR=No;\"");
         }
 
-        private void ResultGrid()
+        private void ResultGrid(DataTable dt)
         {
-
+           
         }
     }
 }
