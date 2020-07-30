@@ -226,7 +226,7 @@ namespace WindowsFormsApp18
             resultText += " on year " + WorstSeasonAndItsYear(pdt)[1].ToString();
             resultText += " with the amount of " + WorstSeasonAndItsYear(pdt)[2].ToString();
             //Result 8
-            resultText += "\n\nDroughts information:";
+            resultText += "\n\nDroughts information: This is a bonus part, we'll see if we do it later on.";
 
             return resultText;
         }
