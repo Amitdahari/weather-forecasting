@@ -38,23 +38,31 @@ namespace WindowsFormsApp18
         //Opens a dialog box to select Excel file 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
-            string excelFile = openFileDialog1.FileName;
-            DataTable dt = LoadWorksheetInDataTable(excelFile);
-            inputGrid.DataSource = dt;
+            try
+            {
+                string excelFile = openFileDialog1.FileName;
+                DataTable dt = LoadWorksheetInDataTable(excelFile);
+                inputGrid.DataSource = dt;
+                this.view_File_path.Text = openFileDialog1.FileName;
+                }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+           }
         }
 
         //Returns the Excel file data as a DataTable
         private DataTable LoadWorksheetInDataTable(string fileName)
         {
             DataTable sheetData = new DataTable();
-            string Sheet1;
+            string sheetName;
 
             //This section is to get the Sheet name.
             using (OleDbConnection conn = this.returnConnection(fileName)) 
             {
                 conn.Open();
                 DataTable dtSchema = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
-                Sheet1 = dtSchema.Rows[0].Field<string>("TABLE_NAME");
+                sheetName = dtSchema.Rows[0].Field<string>("TABLE_NAME");
                 conn.Close();
             }
 
@@ -63,7 +71,7 @@ namespace WindowsFormsApp18
             {
                 conn.Open();
                 // retrieve the data using data adapter
-                OleDbDataAdapter sheetAdapter = new OleDbDataAdapter("select * from [" + Sheet1 + "]", conn);
+                OleDbDataAdapter sheetAdapter = new OleDbDataAdapter("select * from [" + sheetName + "]", conn);
                 sheetAdapter.Fill(sheetData);
                 conn.Close();
             }
@@ -74,6 +82,11 @@ namespace WindowsFormsApp18
         private OleDbConnection returnConnection(string fileName)
         {
             return new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties=\"Excel 12.0;HDR=No;\"");
+        }
+
+        private void ResultGrid()
+        {
+
         }
     }
 }
