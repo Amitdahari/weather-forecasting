@@ -13,9 +13,9 @@ using System.Data.OleDb;
 
 namespace WindowsFormsApp18
 {
+    /*Main class using a Windows Form*/
     public partial class BigDataAppForm : Form
     {
-
 
         public BigDataAppForm()
         {
@@ -27,34 +27,30 @@ namespace WindowsFormsApp18
 
         }
 
+        //Opens a dialog box to select Excel file 
         private void choose_csv_button_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "XLSX files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
             openFileDialog1.ShowDialog();
         }
-
-
-        //Opens a dialog box to select Excel file 
+        
+        //Extract the file when pressing OK.
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             try
             {
                 string excelFile = openFileDialog1.FileName;
                 DataTable dt = LoadWorksheetInDataTable(excelFile);
+                processingData = dt;
                 inputGrid.DataSource = dt;
-                this.view_File_path.Text = openFileDialog1.FileName;
+                processingData = dt.Copy();
+                this.view_File_path.Text = openFileDialog1.FileName;                
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void process_button_Click(object sender, EventArgs e)
-        {
-            mainThread();
-        }
-
 
         //Returns the Excel file data as a DataTable
         private DataTable LoadWorksheetInDataTable(string fileName)
@@ -66,7 +62,8 @@ namespace WindowsFormsApp18
             using (OleDbConnection conn = this.returnConnection(fileName))
             {
                 conn.Open();
-                DataTable dtSchema = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
+                object[] obj = new object[] { null, null, null, "TABLE" };
+                DataTable dtSchema = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, obj);
                 sheetName = dtSchema.Rows[0].Field<string>("TABLE_NAME");
                 conn.Close();
             }
@@ -75,12 +72,12 @@ namespace WindowsFormsApp18
             using (OleDbConnection conn = this.returnConnection(fileName))
             {
                 conn.Open();
-                // retrieve the data using data adapter
-                OleDbDataAdapter sheetAdapter = new OleDbDataAdapter("select * from [" + sheetName + "]", conn);
+                // Retrieve the data using data adapter
+                string sqlCmd = "select * from [" + sheetName + "]";
+                OleDbDataAdapter sheetAdapter = new OleDbDataAdapter(sqlCmd, conn);
                 sheetAdapter.Fill(sheetData);
                 conn.Close();
-            }
-            processingData = sheetData;
+            }            
             return sheetData;
         }
 
@@ -90,112 +87,22 @@ namespace WindowsFormsApp18
             return new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties=\"Excel 12.0;HDR=No;\"");
         }
 
-        /*We'll use this to process the Data.*/
-        DataTable processingData;
 
-        private void mainThread()
+
+        //The DataTable we'll work with 
+        DataTable processingData; 
+
+        //What happens when you press Map Reduce, number represents how many threads.
+        private void map_reduce_button_Click(object sender, EventArgs e)
         {
-           
-            DataTable placeholderDt = new DataTable();
-            placeholderDt.Clear();
-            placeholderDt.Columns.Add("Results:");
-            //Result 1
-            placeholderDt.Rows.Add("Yearly average:");
-            placeholderDt.Rows.Add(TotalYearlyAvg(processingData).ToString());
-            //Result 2
-            placeholderDt.Rows.Add("Best year and its amount:");          
-            placeholderDt.Rows.Add();
-            //Result 3
-            placeholderDt.Rows.Add("Best month,its amount and its year:");
-            placeholderDt.Rows.Add();
-            //Result 4
-            placeholderDt.Rows.Add("Worst year and its amount:");
-            placeholderDt.Rows.Add();
-            //Result 5
-            placeholderDt.Rows.Add("Worst month,its amount and its year:");
-            placeholderDt.Rows.Add();
-            //Result 6
-            placeholderDt.Rows.Add("Best season, its amount and its year:");
-            placeholderDt.Rows.Add();
-            //Result 7
-            placeholderDt.Rows.Add("Worst season, its amount and its year:");
-            placeholderDt.Rows.Add();
-            //Result 8
-            placeholderDt.Rows.Add("Droughts:");
-            placeholderDt.Rows.Add();
-
-
-            outputGrid.DataSource = placeholderDt;
+            MapRecuce.MainMapReduceThread(1);
         }
 
 
-
-        // Support function
-        private double[] YearlyTotal(DataTable dt)
+        //What happens when you press Process.
+        private void process_button_Click(object sender, EventArgs e)
         {
-
-            int totalyears = processingData.Rows.Count;
-            double[] yearlyTot = new double[totalyears];
-            for (int i = 0; i < processingData.Rows.Count; i++)
-            {
-                int yearlySum = 0;
-                for (int j = 1; j < processingData.Columns.Count; j++)
-                    yearlySum += Convert.ToInt32(processingData.Rows[i].ItemArray[j]);
-                yearlyTot[i] = yearlySum;
-            }
-            return yearlyTot;
-        }
-
-        // Input 1.
-        private double TotalYearlyAvg(DataTable dt)
-        {
-            return Queryable.Average(YearlyTotal(dt).AsQueryable());
-        }
-
-        // Input 2.
-        private double BestYear(DataTable dt)
-        {
-            double maxValue = YearlyTotal(dt).Max();
-            double maxIndex = YearlyTotal(dt).ToList().IndexOf(maxValue);
-            return maxIndex;
-        }
-
-        // Input 3
-        private double BestMonthAndItsYear(DataTable dt)
-        {
-            return 1;
-        }
-
-        // Input 4
-        private double WorstYear(DataTable dt)
-        {
-            double minValue = YearlyTotal(dt).Min();
-            double minIndex = YearlyTotal(dt).ToList().IndexOf(minValue);
-            return minIndex;
-        }
-
-        // Input 5
-        private double WorstMonthAndItsYear(DataTable dt)
-        {
-            return 1;
-        }
-
-        // Input 6
-        private double BestSeasonAndItsYear(DataTable dt)
-        {
-            return 1;
-        }
-
-        // Input 7
-        private double WorstSeasonAndItsYear(DataTable dt)
-        {
-            return 1;
-        }
-
-        // Input 8
-        private double WasThereA3YearsOfDrought(DataTable dt)
-        {
-            return 1;
+            resultsTextBox.Text = DataFunc.resultsText(processingData);
         }
     }
 }

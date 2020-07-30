@@ -50,8 +50,11 @@
     <Compile Include="BigDataAppForm.Designer.cs">
       <DependentUpon>BigDataAppForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataFunc.cs" />
+    <Compile Include="MapRecuce.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Results.cs" />
     <EmbeddedResource Include="BigDataAppForm.resx">
       <DependentUpon>BigDataAppForm.cs</DependentUpon>
     </EmbeddedResource>
