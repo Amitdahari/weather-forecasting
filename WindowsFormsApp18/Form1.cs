@@ -90,39 +90,47 @@ namespace WindowsFormsApp18
             return new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties=\"Excel 12.0;HDR=No;\"");
         }
 
-
+        /*We'll use this to process the Data.*/
         DataTable processingData;
+
         private void mainThread()
         {
+            String[] somearray = { "A1", "A2", "A3", "A4", "A5", "A6" };
             DataTable placeholderDt = new DataTable();
             placeholderDt.Clear();
             placeholderDt.Columns.Add("Results:");
             //Result 1
-            placeholderDt.Rows.Add("Yearly Average");
+            placeholderDt.Rows.Add("Yearly average:");
             placeholderDt.Rows.Add(TotalYearlyAvg(processingData).ToString());
             //Result 2
-            placeholderDt.Rows.Add("Yearly Average");
-            placeholderDt.Rows.Add(TotalYearlyAvg(processingData).ToString());
+            placeholderDt.Rows.Add("Best year and its amount:");          
+            placeholderDt.Rows.Add();
             //Result 3
-            placeholderDt.Rows.Add("Yearly Average");
-            placeholderDt.Rows.Add(TotalYearlyAvg(processingData).ToString());
+            placeholderDt.Rows.Add("Best month,its amount and its year:");
+            placeholderDt.Rows.Add();
             //Result 4
-            placeholderDt.Rows.Add("Yearly Average");
-            placeholderDt.Rows.Add(TotalYearlyAvg(processingData).ToString());
+            placeholderDt.Rows.Add("Worst year and its amount:");
+            placeholderDt.Rows.Add();
             //Result 5
-            placeholderDt.Rows.Add("Yearly Average");
-            placeholderDt.Rows.Add(TotalYearlyAvg(processingData).ToString());
+            placeholderDt.Rows.Add("Worst month,its amount and its year:");
+            placeholderDt.Rows.Add();
             //Result 6
-            placeholderDt.Rows.Add("Yearly Average");
-            placeholderDt.Rows.Add(TotalYearlyAvg(processingData).ToString());
+            placeholderDt.Rows.Add("Best season, its amount and its year:");
+            placeholderDt.Rows.Add();
             //Result 7
-            placeholderDt.Rows.Add("Yearly Average");
-            placeholderDt.Rows.Add(TotalYearlyAvg(processingData).ToString());
+            placeholderDt.Rows.Add("Worst season, its amount and its year:");
+            placeholderDt.Rows.Add();
             //Result 8
+            placeholderDt.Rows.Add("Droughts:");
+            placeholderDt.Rows.Add();
+
+
             outputGrid.DataSource = placeholderDt;
         }
 
 
+
+        // Support function
         private double[] YearlyTotal(DataTable dt)
         {
 
@@ -145,18 +153,49 @@ namespace WindowsFormsApp18
         }
 
         // Input 2.
-        private double BestYearIndex(DataTable dt)
+        private double BestYear(DataTable dt)
         {
             double maxValue = YearlyTotal(dt).Max();
             double maxIndex = YearlyTotal(dt).ToList().IndexOf(maxValue);
             return maxIndex;
         }
+
+        // Input 3
+        private double BestMonthAndItsYear(DataTable dt)
+        {
+            return 1;
+        }
+
         // Input 4
-        private double WorstYearIndex(DataTable dt)
+        private double WorstYear(DataTable dt)
         {
             double minValue = YearlyTotal(dt).Min();
             double minIndex = YearlyTotal(dt).ToList().IndexOf(minValue);
             return minIndex;
+        }
+
+        // Input 5
+        private double WorstMonthAndItsYear(DataTable dt)
+        {
+            return 1;
+        }
+
+        // Input 6
+        private double BestSeasonAndItsYear(DataTable dt)
+        {
+            return 1;
+        }
+
+        // Input 7
+        private double WorstSeasonAndItsYear(DataTable dt)
+        {
+            return 1;
+        }
+
+        // Input 8
+        private double WasThereA3YearsOfDrought(DataTable dt)
+        {
+            return 1;
         }
     }
 }
