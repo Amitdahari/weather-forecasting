@@ -76,11 +76,11 @@
             // view_File_path
             // 
             this.view_File_path.AutoSize = true;
-            this.view_File_path.Location = new System.Drawing.Point(127, 37);
+            this.view_File_path.Location = new System.Drawing.Point(106, 37);
             this.view_File_path.Name = "view_File_path";
             this.view_File_path.Size = new System.Drawing.Size(122, 13);
             this.view_File_path.TabIndex = 4;
-            this.view_File_path.Text = "Please choose a csv file";
+            this.view_File_path.Text = "Please choose a xlsx file";
             // 
             // get_result_button
             // 
