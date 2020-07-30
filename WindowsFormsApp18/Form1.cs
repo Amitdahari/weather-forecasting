@@ -53,6 +53,12 @@ namespace WindowsFormsApp18
            }
         }
 
+        private void process_button_Click(object sender, EventArgs e)
+        {
+            label2.Text = ResultGridConventional().ToString();
+        }
+
+
         //Returns the Excel file data as a DataTable
         private DataTable LoadWorksheetInDataTable(string fileName)
         {
@@ -86,14 +92,24 @@ namespace WindowsFormsApp18
             return new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties=\"Excel 12.0;HDR=No;\"");
         }
 
-        private void ResultGrid(DataTable dt)
+        private double ResultGridConventional()
         {
-           
+            double avg = 0;
+            int sum = 0;
+            int totalyears = inputGrid.Rows.Count;
+            for(int i=0;i<inputGrid.Rows.Count;i++)
+            {
+                for (int j = 1; j < inputGrid.Columns.Count; j++)
+                    sum += Convert.ToInt32(inputGrid.Rows[i].Cells[j].Value);
+            }
+            avg = (double)sum / totalyears;
+            return avg;
         }
 
         private void Checkbranch(object obj)
         {
 
         }
+
     }
 }

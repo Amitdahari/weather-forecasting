@@ -39,6 +39,8 @@
             this.inputGrid = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.outputGrid = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inputGrid)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -63,6 +65,7 @@
             this.process_button.TabIndex = 1;
             this.process_button.Text = "Process";
             this.process_button.UseVisualStyleBackColor = true;
+            this.process_button.Click += new System.EventHandler(this.process_button_Click);
             // 
             // map_reduce_button
             // 
@@ -137,11 +140,31 @@
             this.outputGrid.Size = new System.Drawing.Size(642, 150);
             this.outputGrid.TabIndex = 7;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(127, 717);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(79, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Test (average):";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(212, 717);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "label2";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(852, 739);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox_data);
             this.Controls.Add(this.get_result_button);
@@ -174,6 +197,8 @@
         private System.Windows.Forms.DataGridView inputGrid;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView outputGrid;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 
