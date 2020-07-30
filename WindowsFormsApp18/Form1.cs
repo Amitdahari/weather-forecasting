@@ -15,7 +15,7 @@ namespace WindowsFormsApp18
 {
     public partial class Form1 : Form
     {
-       
+
 
         public Form1()
         {
@@ -33,9 +33,6 @@ namespace WindowsFormsApp18
             openFileDialog1.ShowDialog();
         }
 
-        /* TO DO : TRY/CATCH/EXCEPTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!OOOOOOOOOOOOOOOOOO  OOOOOOOOO*/
-        /* IN CASE YOU MISSED THE LINE ABOVE */
-
 
         //Opens a dialog box to select Excel file 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
@@ -46,16 +43,16 @@ namespace WindowsFormsApp18
                 DataTable dt = LoadWorksheetInDataTable(excelFile);
                 inputGrid.DataSource = dt;
                 this.view_File_path.Text = openFileDialog1.FileName;
-                }
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-           }
+            }
         }
 
         private void process_button_Click(object sender, EventArgs e)
         {
-            label2.Text = TotalYearlyAvg().ToString();
+            mainThread();
         }
 
 
@@ -66,7 +63,7 @@ namespace WindowsFormsApp18
             string sheetName;
 
             //This section is to get the Sheet name.
-            using (OleDbConnection conn = this.returnConnection(fileName)) 
+            using (OleDbConnection conn = this.returnConnection(fileName))
             {
                 conn.Open();
                 DataTable dtSchema = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
@@ -75,7 +72,7 @@ namespace WindowsFormsApp18
             }
 
             //This section is to get the sheet data.
-            using (OleDbConnection conn = this.returnConnection(fileName)) 
+            using (OleDbConnection conn = this.returnConnection(fileName))
             {
                 conn.Open();
                 // retrieve the data using data adapter
@@ -83,6 +80,7 @@ namespace WindowsFormsApp18
                 sheetAdapter.Fill(sheetData);
                 conn.Close();
             }
+            processingData = sheetData;
             return sheetData;
         }
 
@@ -92,38 +90,73 @@ namespace WindowsFormsApp18
             return new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties=\"Excel 12.0;HDR=No;\"");
         }
 
-        private double TotalYearlyAvg()
+
+        DataTable processingData;
+        private void mainThread()
         {
-            double avg = 0;
-            int sum = 0;
-            int totalyears = inputGrid.Rows.Count;
-            for(int i=0;i<inputGrid.Rows.Count;i++)
-            {
-                for (int j = 1; j < inputGrid.Columns.Count; j++)
-                    sum += Convert.ToInt32(inputGrid.Rows[i].Cells[j].Value);
-            }
-            avg = (double)sum / totalyears;
-            return avg;
+            DataTable placeholderDt = new DataTable();
+            placeholderDt.Clear();
+            placeholderDt.Columns.Add("Results:");
+            //Result 1
+            placeholderDt.Rows.Add("Yearly Average");
+            placeholderDt.Rows.Add(TotalYearlyAvg(processingData).ToString());
+            //Result 2
+            placeholderDt.Rows.Add("Yearly Average");
+            placeholderDt.Rows.Add(TotalYearlyAvg(processingData).ToString());
+            //Result 3
+            placeholderDt.Rows.Add("Yearly Average");
+            placeholderDt.Rows.Add(TotalYearlyAvg(processingData).ToString());
+            //Result 4
+            placeholderDt.Rows.Add("Yearly Average");
+            placeholderDt.Rows.Add(TotalYearlyAvg(processingData).ToString());
+            //Result 5
+            placeholderDt.Rows.Add("Yearly Average");
+            placeholderDt.Rows.Add(TotalYearlyAvg(processingData).ToString());
+            //Result 6
+            placeholderDt.Rows.Add("Yearly Average");
+            placeholderDt.Rows.Add(TotalYearlyAvg(processingData).ToString());
+            //Result 7
+            placeholderDt.Rows.Add("Yearly Average");
+            placeholderDt.Rows.Add(TotalYearlyAvg(processingData).ToString());
+            //Result 8
+            outputGrid.DataSource = placeholderDt;
         }
 
-        private double[] YearlyTotal()
+
+        private double[] YearlyTotal(DataTable dt)
         {
-            int totalyears = inputGrid.Rows.Count;
+
+            int totalyears = processingData.Rows.Count;
             double[] yearlyTot = new double[totalyears];
-            for (int i = 0; i < inputGrid.Rows.Count; i++)
+            for (int i = 0; i < processingData.Rows.Count; i++)
             {
                 int yearlySum = 0;
-                for (int j = 1; j < inputGrid.Columns.Count; j++)
-                    yearlySum += Convert.ToInt32(inputGrid.Rows[i].Cells[j].Value);
+                for (int j = 1; j < processingData.Columns.Count; j++)
+                    yearlySum += Convert.ToInt32(processingData.Rows[i].ItemArray[j]);
                 yearlyTot[i] = yearlySum;
             }
             return yearlyTot;
         }
 
-        private void Checkbranch(object obj)
+        // Input 1.
+        private double TotalYearlyAvg(DataTable dt)
         {
-
+            return Queryable.Average(YearlyTotal(dt).AsQueryable());
         }
 
+        // Input 2.
+        private double BestYearIndex(DataTable dt)
+        {
+            double maxValue = YearlyTotal(dt).Max();
+            double maxIndex = YearlyTotal(dt).ToList().IndexOf(maxValue);
+            return maxIndex;
+        }
+        // Input 4
+        private double WorstYearIndex(DataTable dt)
+        {
+            double minValue = YearlyTotal(dt).Min();
+            double minIndex = YearlyTotal(dt).ToList().IndexOf(minValue);
+            return minIndex;
+        }
     }
 }
