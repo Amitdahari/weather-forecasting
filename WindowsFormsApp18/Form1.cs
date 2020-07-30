@@ -55,7 +55,7 @@ namespace WindowsFormsApp18
 
         private void process_button_Click(object sender, EventArgs e)
         {
-            label2.Text = ResultGridConventional().ToString();
+            label2.Text = TotalYearlyAvg().ToString();
         }
 
 
@@ -92,7 +92,7 @@ namespace WindowsFormsApp18
             return new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties=\"Excel 12.0;HDR=No;\"");
         }
 
-        private double ResultGridConventional()
+        private double TotalYearlyAvg()
         {
             double avg = 0;
             int sum = 0;
@@ -104,6 +104,20 @@ namespace WindowsFormsApp18
             }
             avg = (double)sum / totalyears;
             return avg;
+        }
+
+        private double[] YearlyTotal()
+        {
+            int totalyears = inputGrid.Rows.Count;
+            double[] yearlyTot = new double[totalyears];
+            for (int i = 0; i < inputGrid.Rows.Count; i++)
+            {
+                int yearlySum = 0;
+                for (int j = 1; j < inputGrid.Columns.Count; j++)
+                    yearlySum += Convert.ToInt32(inputGrid.Rows[i].Cells[j].Value);
+                yearlyTot[i] = yearlySum;
+            }
+            return yearlyTot;
         }
 
         private void Checkbranch(object obj)
