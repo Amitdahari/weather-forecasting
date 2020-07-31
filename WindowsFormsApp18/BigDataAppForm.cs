@@ -41,10 +41,10 @@ namespace WindowsFormsApp18
             {
                 string excelFile = openFileDialog1.FileName;
                 DataTable dt = LoadWorksheetInDataTable(excelFile);
-                processingData = dt;
-                inputGrid.DataSource = dt;
-                //inputGrid.DataSource = MapRecuce.TableSplit(dt, 1)[0];
-                processingData = dt.Copy();
+                processingData = dt.Copy();//Take the table as our new DT for calculations.
+                inputGrid.DataSource = dt; //Displaying DT on the DataGrid.
+                threadsTextBox.Maximum = dt.Rows.Count/2; //Making sure every split table is at least 2 rows. (Otherwise division by 0).
+
                 this.view_File_path.Text = openFileDialog1.FileName;                
             }
             catch (Exception ex)
@@ -91,14 +91,43 @@ namespace WindowsFormsApp18
 
 
         //The DataTable we'll work with 
-        DataTable processingData; 
+        DataTable processingData;
+        //The number of threads for MapReduce
+        int threads;
+
 
         //What happens when you press Map Reduce, number represents how many threads.
         private void map_reduce_button_Click(object sender, EventArgs e)
         {
             try
             {
-                MapRecuce.MainMapReduceThread(1);
+
+                threads = (int)threadsTextBox.Value;
+                MapRecuce.MainMapReduceThread(threads); //This is what we'll actually use
+
+                /*************************************************************************************************/
+                /*The text here will be probably moved to MainMapReduceThreads and the loop will contain threads.*/
+
+                var watch = System.Diagnostics.Stopwatch.StartNew(); //Start a timer for calculations.
+                resultsTextBox.Text = ""; //Clear current text in text box.
+
+                for (int i = 0; i < threads; i++)
+                {
+                    resultsTextBox.Text += "Table " + (i+1).ToString()+" results: ";
+                    Results res = new Results(MapRecuce.TableSplit(processingData, threads)[i]); //NEEDS THREADS
+                    resultsTextBox.Text += DataFunc.ResultsText(res); //This is basically not needed, just for us to see. WIll change later.
+                }
+
+                /*Add overall result here*/
+
+                watch.Stop(); //End timer for calculation
+                var elapsedMs = watch.ElapsedMilliseconds;
+
+                resultsTextBox.Text += "Overall run time (includes table splitting): " + elapsedMs.ToString();
+
+                /*The text here will be probably moved to MainMapReduceThreads and the loop will contain threads.*/
+                /*************************************************************************************************/
+
             }
             catch (Exception ex)
             {
@@ -112,13 +141,28 @@ namespace WindowsFormsApp18
         {
             try
             {
-                Results res = new Results(processingData);
-                resultsTextBox.Text = DataFunc.ResultsText(res);
+                threads = 1;
+                var watch = System.Diagnostics.Stopwatch.StartNew(); //Start a timer for calculations.
+                resultsTextBox.Text = ""; //Clear current text in text box.
+
+                //Results res = new Results(processingData); //This is how it was before.
+                
+                //To compare to MR, we'll add the split time into this calculation as well.
+                Results res = new Results(MapRecuce.TableSplit(processingData, threads)[0]); //"Split" the table to 1.
+                //TODO: This ^ line will be changed to work with threads (only one thread here).
+
+                resultsTextBox.Text += DataFunc.ResultsText(res);
+                
+                watch.Stop(); //End timer for calculation
+                var elapsedMs = watch.ElapsedMilliseconds;
+
+                resultsTextBox.Text += "Overall run time: " + elapsedMs.ToString();
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
+
     }
 }

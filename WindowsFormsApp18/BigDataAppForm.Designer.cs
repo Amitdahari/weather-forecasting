@@ -39,9 +39,12 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.resultsTextBox = new System.Windows.Forms.RichTextBox();
             this.get_result_button = new System.Windows.Forms.Button();
+            this.threadsLabel = new System.Windows.Forms.Label();
+            this.threadsTextBox = new System.Windows.Forms.NumericUpDown();
             this.groupBox_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inputGrid)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.threadsTextBox)).BeginInit();
             this.SuspendLayout();
             // 
             // choose_csv_button
@@ -66,7 +69,7 @@
             // 
             // map_reduce_button
             // 
-            this.map_reduce_button.Location = new System.Drawing.Point(217, 696);
+            this.map_reduce_button.Location = new System.Drawing.Point(443, 696);
             this.map_reduce_button.Name = "map_reduce_button";
             this.map_reduce_button.Size = new System.Drawing.Size(110, 31);
             this.map_reduce_button.TabIndex = 2;
@@ -140,11 +143,44 @@
             this.get_result_button.Text = "Import to .txt";
             this.get_result_button.UseVisualStyleBackColor = true;
             // 
+            // threadsLabel
+            // 
+            this.threadsLabel.AutoSize = true;
+            this.threadsLabel.Location = new System.Drawing.Point(294, 705);
+            this.threadsLabel.Name = "threadsLabel";
+            this.threadsLabel.Size = new System.Drawing.Size(69, 13);
+            this.threadsLabel.TabIndex = 10;
+            this.threadsLabel.Text = "MR Threads:";
+            // 
+            // threadsTextBox
+            // 
+            this.threadsTextBox.Location = new System.Drawing.Point(367, 703);
+            this.threadsTextBox.Maximum = new decimal(new int[] {
+            131072,
+            0,
+            0,
+            0});
+            this.threadsTextBox.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.threadsTextBox.Name = "threadsTextBox";
+            this.threadsTextBox.Size = new System.Drawing.Size(70, 20);
+            this.threadsTextBox.TabIndex = 11;
+            this.threadsTextBox.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // BigDataAppForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(852, 739);
+            this.Controls.Add(this.threadsTextBox);
+            this.Controls.Add(this.threadsLabel);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox_data);
             this.Controls.Add(this.get_result_button);
@@ -158,6 +194,7 @@
             this.groupBox_data.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.inputGrid)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.threadsTextBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -176,6 +213,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RichTextBox resultsTextBox;
         private System.Windows.Forms.Button get_result_button;
+        private System.Windows.Forms.Label threadsLabel;
+        private System.Windows.Forms.NumericUpDown threadsTextBox;
     }
 }
 

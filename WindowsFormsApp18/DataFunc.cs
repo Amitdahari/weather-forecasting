@@ -187,7 +187,7 @@ namespace WindowsFormsApp18
         public static string ResultsText(Results res)
         {
             String resultText = "";
-            resultText += "Results that were obtained in "+res.ExecutionTime.ToString()+" miliseconds:";
+            resultText += "Results for table that were obtained in "+res.ExecutionTime.ToString()+" miliseconds:";
             //Result 1
             resultText += "\n\n1. Yearly average:";
             resultText += " " + res.YearlyAvg.ToString();
@@ -220,7 +220,7 @@ namespace WindowsFormsApp18
             resultText += " of the year " + res.WorstSeasonYear.ToString();
             resultText += " with the amount of " + res.WorstSeasonAmount.ToString();
             //Result 8
-            resultText += "\n\n8. Droughts information: This is a bonus part, we'll see if we do it later on.";
+            resultText += "\n\n8. Droughts information: This is a bonus part, we'll see if we do it later on.\n\n\n";
                         
 
             return resultText;
