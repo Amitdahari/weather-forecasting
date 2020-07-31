@@ -95,14 +95,28 @@ namespace WindowsFormsApp18
         //What happens when you press Map Reduce, number represents how many threads.
         private void map_reduce_button_Click(object sender, EventArgs e)
         {
-            MapRecuce.MainMapReduceThread(1);
+            try
+            {
+                MapRecuce.MainMapReduceThread(1);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
 
         //What happens when you press Process.
         private void process_button_Click(object sender, EventArgs e)
         {
-            resultsTextBox.Text = DataFunc.resultsText(processingData);
+            try
+            {
+                resultsTextBox.Text = DataFunc.resultsText(processingData);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
