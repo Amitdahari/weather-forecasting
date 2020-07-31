@@ -188,7 +188,7 @@ namespace WindowsFormsApp18
         }
 
         /*We'll arrange text.*/
-        public static string resultsText(DataTable pdt)
+        public static string resultsText(Results pdt)
         {
             String resultText = "";
             resultText += "Results:";
