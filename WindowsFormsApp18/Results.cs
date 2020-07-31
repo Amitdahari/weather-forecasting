@@ -5,30 +5,33 @@ using System.Text;
 
 namespace WindowsFormsApp18
 {
-    class Results
+    public class Results
     {
         //Result 1
-        private double yearlyAvg;
+        public double YearlyAvg { get; set; }
         //Result 2
-        private int bestYear, bestYearAmount;
+        public int BestYear { get; set; }
+        public int BestYearAmount { get; set; }
         //Result 3
-        private string bestMonth;
-        private int bestMonthYear, bestMonthAmount;
+        public string BestMonth { get; set; }
+        public int BestMonthYear { get; set; }
+        public int BestMonthAmount { get; set; }
         //Result 4
-        private int worstYear, worstYearAmount;
+        public int WorstYear { get; set; }
+        public int WorstYearAmount { get; set; }
         //Result 5
-        private string worstMonth;
-        private int worstMonthYear, worstMonthAmount;
+        public string WorstMonth { get; set; }
+        public int WorstMonthYear { get; set; }
+        public int WorstMonthAmount { get; set; }
         //Result 6
-        private string bestSeason;
-        private int bestSeasonYear, bestSeasonAmount;
+        public string BestSeason { get; set; }
+        public int BestSeasonYear { get; set; }
+        public int BestSeasonAmount { get; set; }
         //Result 7
-        private string worstSeason;
-        private int worstSeasonYear, worstSeasonAmount;
+        public string WorstSeason { get; set; }
+        public int WorstSeasonYear { get; set; }
+        public int WorstSeasonAmount { get; set; }
         //Result 8
-
-        
-
 
 
 
