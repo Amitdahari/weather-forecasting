@@ -42,7 +42,8 @@ namespace WindowsFormsApp18
                 string excelFile = openFileDialog1.FileName;
                 DataTable dt = LoadWorksheetInDataTable(excelFile);
                 processingData = dt;
-                inputGrid.DataSource = MapRecuce.TableSplit(dt, 7)[6];
+                inputGrid.DataSource = dt;
+                //inputGrid.DataSource = MapRecuce.TableSplit(dt, 1)[0];
                 processingData = dt.Copy();
                 this.view_File_path.Text = openFileDialog1.FileName;                
             }
@@ -111,7 +112,8 @@ namespace WindowsFormsApp18
         {
             try
             {
-                resultsTextBox.Text = DataFunc.resultsText(processingData);
+                Results res = new Results(processingData);
+                resultsTextBox.Text = DataFunc.ResultsText(res);
             }
             catch(Exception ex)
             {

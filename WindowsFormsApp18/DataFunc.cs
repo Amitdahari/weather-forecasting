@@ -14,12 +14,6 @@ namespace WindowsFormsApp18
     public static class DataFunc
     {
 
-        //An array with the months names to use in results 3,5.
-        private static String[] monthNames = (new System.Globalization.CultureInfo("en-US")).DateTimeFormat.MonthNames;
-        //An array with the seasons names to use in results 6,7.
-        private static String[] seasonNames = { "Winter", "Spring", "Summer", "Fall" };
-
-
         // Support function for total of each year returns a list, ordered by years for 1,2,4 .
         public static double[] YearlyTotal(DataTable dt)
         {
@@ -187,44 +181,47 @@ namespace WindowsFormsApp18
             return 1;
         }
 
-        /*We'll arrange text.*/
-        public static string resultsText(Results pdt)
+
+
+        /*We'll arrange the text.*/
+        public static string ResultsText(Results res)
         {
             String resultText = "";
-            resultText += "Results:";
+            resultText += "Results that were obtained in "+res.ExecutionTime.ToString()+" miliseconds:";
             //Result 1
-            resultText += "\n\nYearly average:";
-            resultText += " " + TotalYearlyAvg(pdt).ToString();
+            resultText += "\n\n1. Yearly average:";
+            resultText += " " + res.YearlyAvg.ToString();
             //Result 2
-            resultText += "\n\nBest year and its amount:";
-            resultText += " The year " + BestYear(pdt)[0].ToString();
-            resultText += " with the amount of" + BestYear(pdt)[1].ToString();
+            resultText += "\n\n2. Best year and its amount:";
+            resultText += " The year " + res.BestYear.ToString();
+            resultText += " with the amount of" + res.BestYearAmount.ToString();
             //Result 3
-            resultText += "\n\nBest month,its amount and its year:";
-            resultText += " The month " + monthNames[BestMonthAndItsYear(pdt)[0]];
-            resultText += " on year " + BestMonthAndItsYear(pdt)[1].ToString();
-            resultText += " with the amount of" + BestMonthAndItsYear(pdt)[2].ToString();
+            resultText += "\n\n3. Best month, its amount and its year:";
+            resultText += " The month " + res.BestMonth.ToString();
+            resultText += " of the year " + res.BestMonthYear.ToString();
+            resultText += " with the amount of" + res.BestMonthAmount.ToString();
             //Result 4
-            resultText += "\n\nWorst year and its amount:";
-            resultText += " The year " + WorstYear(pdt)[0].ToString();
-            resultText += " with the amount of " + WorstYear(pdt)[1].ToString();
+            resultText += "\n\n4. Worst year and its amount:";
+            resultText += " The year " + res.WorstYear.ToString();
+            resultText += " with the amount of " + res.WorstYearAmount.ToString();
             //Result 5
-            resultText += "\n\nWorst month,its amount and its year:";
-            resultText += " The month " + monthNames[WorstMonthAndItsYear(pdt)[0]];
-            resultText += " on year " + WorstMonthAndItsYear(pdt)[1].ToString();
-            resultText += " with the amount of " + WorstMonthAndItsYear(pdt)[2].ToString();            
+            resultText += "\n\n5. Worst month, its amount and its year:";
+            resultText += " The month " + res.WorstMonth.ToString();
+            resultText += " of the year " + res.WorstMonthYear.ToString();
+            resultText += " with the amount of " + res.WorstMonthAmount.ToString();
             //Result 6
-            resultText += "\n\nBest season, its amount and its year:";
-            resultText += " The season " + seasonNames[BestSeasonAndItsYear(pdt)[0]];
-            resultText += " on year " + BestSeasonAndItsYear(pdt)[1].ToString();
-            resultText += " with the amount of " + BestSeasonAndItsYear(pdt)[2].ToString();
+            resultText += "\n\n6. Best season, its amount and its year:";
+            resultText += " The " + res.BestSeason.ToString()+ " season ";
+            resultText += " of the year " + res.BestSeasonYear.ToString();
+            resultText += " with the amount of " + res.BestSeasonAmount.ToString();
             //Result 7
-            resultText += "\n\nWorst season, its amount and its year:";
-            resultText += " The season " + seasonNames[WorstSeasonAndItsYear(pdt)[0]];
-            resultText += " on year " + WorstSeasonAndItsYear(pdt)[1].ToString();
-            resultText += " with the amount of " + WorstSeasonAndItsYear(pdt)[2].ToString();
+            resultText += "\n\n7. Worst season, its amount and its year:";
+            resultText += " The " + res.WorstSeason.ToString()+ " season ";
+            resultText += " of the year " + res.WorstSeasonYear.ToString();
+            resultText += " with the amount of " + res.WorstSeasonAmount.ToString();
             //Result 8
-            resultText += "\n\nDroughts information: This is a bonus part, we'll see if we do it later on.";
+            resultText += "\n\n8. Droughts information: This is a bonus part, we'll see if we do it later on.";
+                        
 
             return resultText;
         }
