@@ -117,8 +117,8 @@ namespace WindowsFormsApp18
                 watch.Stop(); //End timer for calculation
                 var elapsedMs = watch.ElapsedMilliseconds;
 
-                resultsTextBox.Text += "Overall run time: " + elapsedMs.ToString() + " miliseconds.";
-
+                resultsTextBox.Text += "Overall run time: " + elapsedMs.ToString() + " miliseconds. \n";
+                resultsTextBox.Text += "Overall memory usage: " + GC.GetTotalMemory(true)+" bytes";
 
             }
             catch (Exception ex)
@@ -145,7 +145,8 @@ namespace WindowsFormsApp18
                 watch.Stop(); //End timer for calculation
                 var elapsedMs = watch.ElapsedMilliseconds;
 
-                resultsTextBox.Text += "Overall run time: " + elapsedMs.ToString()+" miliseconds.";
+                resultsTextBox.Text += "Overall run time: " + elapsedMs.ToString()+" miliseconds. \n";
+                resultsTextBox.Text += "Overall memory usage: " + GC.GetTotalMemory(true)+" bytes";
             }
             catch (Exception ex)
             {
