@@ -79,7 +79,7 @@ namespace WindowsFormsApp18
             return finalRes[finalRes.Length - 1]; //Return the final and most updated result.
         }
 
-        //Splits the DataTable into few DataTables inorder to process each table on each Thread - FIX THIS.
+        //Splits the DataTable into few DataTables inorder to process each table on each Thread.
         public static DataTable[] TableSplit(DataTable dt, int divider)
         {
             int chunkSize = dt.Rows.Count / divider; // Number of divided chunkes from the table
