@@ -38,11 +38,11 @@ namespace WindowsFormsApp18
 
         // Output Result  2, best year.
         public static int[] BestYear(DataTable dt)
-        {           
+        {
             int maxValue = (int)YearlyTotal(dt).Max();
             int maxIndex = YearlyTotal(dt).ToList().IndexOf(maxValue);
-            int bestYear = Convert.ToInt32(dt.Rows[maxIndex].ItemArray[0]); 
-            int[] result = { bestYear , maxValue };
+            int bestYear = Convert.ToInt32(dt.Rows[maxIndex].ItemArray[0]);
+            int[] result = { bestYear, maxValue };
             return result;
         }
 
@@ -61,24 +61,24 @@ namespace WindowsFormsApp18
         // Output Result 3, best month and on what year.
         public static int[] BestMonthAndItsYear(DataTable dt)
         {
-            int bestMonthIndex=0;
-            int bestMonthsYearIndex=0;
-            int maxValue=-1;
+            int bestMonthIndex = 0;
+            int bestMonthsYearIndex = 0;
+            int maxValue = -1;
 
             for (int i = 1; i <= 12; i++)
             {
                 if ((int)AmountsByMonth(dt, i).Max() > maxValue)
                 {
                     maxValue = (int)AmountsByMonth(dt, i).Max();
-                    bestMonthIndex = i-1;
+                    bestMonthIndex = i - 1;
                     bestMonthsYearIndex = AmountsByMonth(dt, i).ToList().IndexOf(maxValue);
-                }             
+                }
             }
 
             int bestMonth = bestMonthIndex;
             int bestMonthsYear = Convert.ToInt32(dt.Rows[bestMonthsYearIndex].ItemArray[0]);
             int[] result = { bestMonth, bestMonthsYear, maxValue };
-            return result;     
+            return result;
         }
 
         // Output Result  4, worst year.
@@ -187,7 +187,7 @@ namespace WindowsFormsApp18
         public static string ResultsText(Results res)
         {
             String resultText = "";
-            resultText += "Results for table that were obtained in "+res.ExecutionTime.ToString()+" miliseconds:";
+            resultText += "Results for table that were obtained in " + res.ExecutionTime.ToString() + " miliseconds:";
             //Result 1
             resultText += "\n\n1. Yearly average:";
             resultText += " " + res.YearlyAvg.ToString();
@@ -211,17 +211,17 @@ namespace WindowsFormsApp18
             resultText += " with the amount of " + res.WorstMonthAmount.ToString();
             //Result 6
             resultText += "\n\n6. Best season, its amount and its year:";
-            resultText += " The " + res.BestSeason.ToString()+ " season ";
+            resultText += " The " + res.BestSeason.ToString() + " season ";
             resultText += " of the year " + res.BestSeasonYear.ToString();
             resultText += " with the amount of " + res.BestSeasonAmount.ToString();
             //Result 7
             resultText += "\n\n7. Worst season, its amount and its year:";
-            resultText += " The " + res.WorstSeason.ToString()+ " season ";
+            resultText += " The " + res.WorstSeason.ToString() + " season ";
             resultText += " of the year " + res.WorstSeasonYear.ToString();
             resultText += " with the amount of " + res.WorstSeasonAmount.ToString();
             //Result 8
             resultText += "\n\n8. Droughts information: This is a bonus part, we'll see if we do it later on.\n\n\n";
-                        
+
 
             return resultText;
         }

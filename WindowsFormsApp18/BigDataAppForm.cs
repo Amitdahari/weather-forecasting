@@ -33,7 +33,7 @@ namespace WindowsFormsApp18
             openFileDialog1.Filter = "XLSX files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
             openFileDialog1.ShowDialog();
         }
-        
+
         //Extract the file when pressing OK.
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
@@ -43,9 +43,9 @@ namespace WindowsFormsApp18
                 DataTable dt = LoadWorksheetInDataTable(excelFile);
                 processingData = dt.Copy();//Take the table as our new DT for calculations.
                 inputGrid.DataSource = dt; //Displaying DT on the DataGrid.
-                threadsTextBox.Maximum = dt.Rows.Count/2; //Making sure every split table is at least 2 rows. (Otherwise division by 0).
+                threadsTextBox.Maximum = dt.Rows.Count / 2; //Making sure every split table is at least 2 rows. (Otherwise division by 0).
 
-                this.view_File_path.Text = openFileDialog1.FileName;                
+                this.view_File_path.Text = openFileDialog1.FileName;
             }
             catch (Exception ex)
             {
@@ -78,7 +78,7 @@ namespace WindowsFormsApp18
                 OleDbDataAdapter sheetAdapter = new OleDbDataAdapter(sqlCmd, conn);
                 sheetAdapter.Fill(sheetData);
                 conn.Close();
-            }            
+            }
             return sheetData;
         }
 
@@ -101,9 +101,9 @@ namespace WindowsFormsApp18
         {
             try
             {
-                
+
                 threads = (int)threadsTextBox.Value;
-                MapRecuce.MainMapReduceThread(processingData,threads); //This is what we'll actually use
+                resultsTextBox.Text = DataFunc.ResultsText(MapRecuce.MainMapReduceThread(processingData, threads)); //This is what we'll actually use
 
                 /*************************************************************************************************/
                 /*The text here will be probably moved to MainMapReduceThreads and the loop will contain threads.*/
@@ -146,19 +146,19 @@ namespace WindowsFormsApp18
                 resultsTextBox.Text = ""; //Clear current text in text box.
 
                 //Results res = new Results(processingData); //This is how it was before.
-                
+
                 //To compare to MR, we'll add the split time into this calculation as well.
                 Results res = new Results(MapRecuce.TableSplit(processingData, threads)[0]); //"Split" the table to 1.
                 //TODO: This ^ line will be changed to work with threads (only one thread here).
 
                 resultsTextBox.Text += DataFunc.ResultsText(res);
-                
+
                 watch.Stop(); //End timer for calculation
                 var elapsedMs = watch.ElapsedMilliseconds;
 
                 resultsTextBox.Text += "Overall run time: " + elapsedMs.ToString();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
