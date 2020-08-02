@@ -101,9 +101,9 @@ namespace WindowsFormsApp18
         {
             try
             {
-                
+
                 threads = (int)threadsTextBox.Value;
-                MapRecuce.MainMapReduceThread(processingData,threads); //This is what we'll actually use
+                resultsTextBox.Text = DataFunc.ResultsText(MapRecuce.MainMapReduceThread(processingData, threads)); //This is what we'll actually use
 
                 /*************************************************************************************************/
                 /*The text here will be probably moved to MainMapReduceThreads and the loop will contain threads.*/
@@ -163,6 +163,6 @@ namespace WindowsFormsApp18
                 MessageBox.Show(ex.Message);
             }
         }
-
+        
     }
 }

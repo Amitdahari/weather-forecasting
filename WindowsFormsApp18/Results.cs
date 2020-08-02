@@ -15,10 +15,12 @@ namespace WindowsFormsApp18
         //An array with the seasons names to use in results 6,7.
         private static String[] seasonNames = { "Winter", "Spring", "Summer", "Fall" };
 
+
         //ExecutionTimeResult
         public double ExecutionTime { get; private set; }
         //Result 1
         public double YearlyAvg { get; set; }
+        public int ResultWeight { get; private set; }
         //Result 2
         public int BestYear { get; set; }
         public int BestYearAmount { get; set; }
@@ -52,7 +54,7 @@ namespace WindowsFormsApp18
         {
             var watch = System.Diagnostics.Stopwatch.StartNew(); //Start a timer for calculations.
 
-            
+            this.ResultWeight = pdt.Rows.Count; //How many lines table has, for usage in comparison for average.
             this.YearlyAvg = DataFunc.TotalYearlyAvg(pdt); //Calculate it here, this is not an array so one line is enough.
 
             int[] bestYearResultsArray = DataFunc.BestYear(pdt); //Calculate result array once for usage in the next lines.
@@ -95,9 +97,41 @@ namespace WindowsFormsApp18
         }
 
 
-        public Results CompareResults()
+        public Results CompareResults(Results comparison)
         {
-            return null;
-        }
+
+        //Result 1
+        this.YearlyAvg = (this.YearlyAvg*this.ResultWeight + comparison.YearlyAvg*comparison.ResultWeight / (this.ResultWeight+comparison.ResultWeight));
+
+            ////Result 2
+            //this.BestYear
+            //this.BestYearAmount
+            ////Result 3
+            //this.BestMonth
+            //this.BestMonthIndex
+            //this.BestMonthYear
+            //this.BestMonthAmount
+            ////Result 4
+            //this.WorstYear
+            //this.WorstYearAmount
+            ////Result 5
+            //this.WorstMonth 
+            //this.WorstMonthIndex
+            //this.WorstMonthYear
+            //this.WorstMonthAmount 
+            ////Result 6
+            //this.BestSeason
+            //this.BestSeasonIndex
+            //this.BestSeasonYear
+            //this.BestSeasonAmount
+            ////Result 7
+            //this.WorstSeason 
+            //this.WorstSeasonIndex
+            //this.WorstSeasonYear
+            //this.WorstSeasonAmount
+
+
+            return this;
+    }
     }
 }
