@@ -122,7 +122,7 @@
             this.groupBox1.Controls.Add(this.get_result_button);
             this.groupBox1.Location = new System.Drawing.Point(28, 557);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(796, 170);
+            this.groupBox1.Size = new System.Drawing.Size(796, 277);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Results";
@@ -133,7 +133,7 @@
             this.resultsTextBox.Location = new System.Drawing.Point(6, 19);
             this.resultsTextBox.Name = "resultsTextBox";
             this.resultsTextBox.ReadOnly = true;
-            this.resultsTextBox.Size = new System.Drawing.Size(703, 145);
+            this.resultsTextBox.Size = new System.Drawing.Size(703, 251);
             this.resultsTextBox.TabIndex = 0;
             this.resultsTextBox.Text = "";
             // 
@@ -141,7 +141,7 @@
             // 
             this.get_result_button.Location = new System.Drawing.Point(715, 19);
             this.get_result_button.Name = "get_result_button";
-            this.get_result_button.Size = new System.Drawing.Size(75, 145);
+            this.get_result_button.Size = new System.Drawing.Size(75, 251);
             this.get_result_button.TabIndex = 5;
             this.get_result_button.Text = "Import to Text File";
             this.get_result_button.UseVisualStyleBackColor = true;
@@ -192,7 +192,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(852, 739);
+            this.ClientSize = new System.Drawing.Size(852, 839);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.threadsTextBox);
             this.Controls.Add(this.groupBox1);
@@ -206,6 +206,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "BigDataAppForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Map/Reduce Main App Form";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox_data.ResumeLayout(false);

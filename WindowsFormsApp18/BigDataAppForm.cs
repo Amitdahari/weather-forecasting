@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Data.OleDb;
 
+
 /*Important: In case of an 12.0 error, download Microsoft Access Database Engine Redistributable 2010.*/
 
 namespace WindowsFormsApp18
@@ -46,7 +47,7 @@ namespace WindowsFormsApp18
                 DataTable dt = LoadWorksheetInDataTable(excelFile);
                 processingData = dt.Copy();//Take the table as our new DT for calculations.
                 inputGrid.DataSource = dt; //Displaying DT on the DataGrid.
-                threadsTextBox.Maximum = dt.Rows.Count / 2; //Making sure every split table is at least 2 rows. (Otherwise division by 0).
+                threadsTextBox.Maximum = dt.Rows.Count / 3; //Making sure every split table is at least 2 rows. (Otherwise division by 0).
                 this.view_File_path.Text = openFileDialog1.FileName;
                 this.process_button.Enabled = true;
                 this.map_reduce_button.Enabled = true;
@@ -95,7 +96,6 @@ namespace WindowsFormsApp18
         }
 
 
-
         //The DataTable we'll work with 
         DataTable processingData;
         //The number of threads for MapReduce
@@ -107,18 +107,21 @@ namespace WindowsFormsApp18
         {
             try
             {
-                var watch = System.Diagnostics.Stopwatch.StartNew(); //Start a timer for calculations.
                 resultsTextBox.Text = ""; //Clear current text in text box.
+                threads = (int)threadsTextBox.Value; //Number of threads.
 
-                threads = (int)threadsTextBox.Value;
-                Results res = MapReduce.MainMapReduceThread(processingData, threads);
-                resultsTextBox.Text = DataFunc.ResultsText(res);
+                var usageBytes0 = GC.GetTotalMemory(true); //Memory usage after GC and before processing.
+                var watch = System.Diagnostics.Stopwatch.StartNew(); //Start a timer for calculations.
+
+                Results res = MapReduce.MainMapReduceThread(processingData, threads); //Activate MapReduce
 
                 watch.Stop(); //End timer for calculation
-                var elapsedMs = watch.ElapsedMilliseconds;
+                var usageBytes = GC.GetTotalMemory(false) - usageBytes0; //Memory usage after processing/before GC. Minus previous memory. 
+                var elapsedMs = watch.ElapsedMilliseconds;  //Get timer value
 
-                resultsTextBox.Text += "Overall run time: " + elapsedMs.ToString() + " miliseconds. \n";
-                resultsTextBox.Text += "Overall memory usage: " + GC.GetTotalMemory(true)+" bytes";
+                resultsTextBox.Text = DataFunc.ResultsText(res); //Push results into Textbox
+                resultsTextBox.Text += "Overall run time: " + elapsedMs + " miliseconds. \n";
+                resultsTextBox.Text += "Current memory usage: " + usageBytes/1024 + " KB";
 
             }
             catch (Exception ex)
@@ -133,20 +136,20 @@ namespace WindowsFormsApp18
         {
             try
             {
-                threads = 1;
-                var watch = System.Diagnostics.Stopwatch.StartNew(); //Start a timer for calculations.
                 resultsTextBox.Text = ""; //Clear current text in text box.
 
-                //To compare to MR, we'll add the split time into this calculation as well.
-                Results res = new Results(MapReduce.TableSplit(processingData, threads)[0]); //"Split" the table to 1.
+                var usageBytes0 = GC.GetTotalMemory(true); //Memory usage after GC and before processing.
+                var watch = System.Diagnostics.Stopwatch.StartNew(); //Start a timer for calculations.
 
-                resultsTextBox.Text += DataFunc.ResultsText(res);
+                Results res = new Results(processingData); //Activate normal processing.
 
                 watch.Stop(); //End timer for calculation
-                var elapsedMs = watch.ElapsedMilliseconds;
+                var usageBytes = GC.GetTotalMemory(false) - usageBytes0; //Memory usage after processing/before GC. Minus previous memory. 
+                var elapsedMs = watch.ElapsedMilliseconds; //Get timer value
 
+                resultsTextBox.Text = DataFunc.ResultsText(res); //Push results into Textbox
                 resultsTextBox.Text += "Overall run time: " + elapsedMs.ToString()+" miliseconds. \n";
-                resultsTextBox.Text += "Overall memory usage: " + GC.GetTotalMemory(true)+" bytes";
+                resultsTextBox.Text += "Current memory usage: " + usageBytes/1024 + " KB";
             }
             catch (Exception ex)
             {
@@ -163,7 +166,7 @@ namespace WindowsFormsApp18
                 if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     File.WriteAllText(saveFileDialog1.FileName, resultsTextBox.Text);
-                    MessageBox.Show("File Contents were saved!", "Notice", MessageBoxButtons.OK);
+                    MessageBox.Show("Message Box contents were saved!", "Notice", MessageBoxButtons.OK);
                     saveFileDialog1.FileName = "";
                 }
             }

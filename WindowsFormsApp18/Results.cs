@@ -85,6 +85,7 @@ namespace WindowsFormsApp18
             this.WorstSeason = seasonNames[WorstSeasonIndex];
             this.WorstSeasonYear = worstSeasonResultArray[1];
             this.WorstSeasonAmount = worstSeasonResultArray[2];
+
         }
 
         //This function compares takes the best values of both Results puts them in the comparison.

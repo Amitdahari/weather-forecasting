@@ -25,7 +25,7 @@ namespace WindowsFormsApp18
             return Merge();
         }
 
-        //Maps the split data into "computers" - our threads. Each thread has one table.
+        //Maps the split data for the "computers" - our threads. Each thread has one table.
         public static void Map(DataTable dt, int threads)
         {
 
@@ -63,7 +63,7 @@ namespace WindowsFormsApp18
             }
         }
 
-        //Merge the result
+        //Merge the result 
         public static Results Merge() 
         {
 
