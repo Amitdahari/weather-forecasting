@@ -114,7 +114,7 @@ namespace WindowsFormsApp18
             return result;
         }
 
-        //Support function for output 6,7
+        //Support function for output 6, 7.
         public static double[] AmountsBySeason(DataTable dt, int season)
         {
             int[,] seasonMonths = { { 12, 1, 2 }, { 3, 4, 5 }, { 6, 7, 8 }, { 9, 10, 11 } };
@@ -153,7 +153,7 @@ namespace WindowsFormsApp18
         // Output Result  7, worst season and its year.
         public static int[] WorstSeasonAndItsYear(DataTable dt)
         {
-            {
+            
                 int worstSeasonIndex = 0;
                 int worstSeasonsYearIndex = 0;
                 int minValue = 9999;
@@ -172,13 +172,7 @@ namespace WindowsFormsApp18
                 int bestSeasonsYear = Convert.ToInt32(dt.Rows[worstSeasonsYearIndex].ItemArray[0]);
                 int[] result = { bestSeason, bestSeasonsYear, minValue };
                 return result;
-            }
-        }
-
-        // Output Result  8, drought bonus.
-        public static double WasThereA3YearsOfDrought(DataTable dt)
-        {
-            return 1;
+            
         }
 
 
@@ -187,14 +181,14 @@ namespace WindowsFormsApp18
         public static string ResultsText(Results res)
         {
             String resultText = "";
-            resultText += "Results for table that were obtained in " + res.ExecutionTime.ToString() + " miliseconds:";
+            resultText += "Results: ";
             //Result 1
             resultText += "\n\n1. Yearly average:";
             resultText += " " + res.YearlyAvg.ToString();
             //Result 2
             resultText += "\n\n2. Best year and its amount:";
             resultText += " The year " + res.BestYear.ToString();
-            resultText += " with the amount of" + res.BestYearAmount.ToString();
+            resultText += " with the amount of " + res.BestYearAmount.ToString();
             //Result 3
             resultText += "\n\n3. Best month, its amount and its year:";
             resultText += " The month " + res.BestMonth.ToString();
@@ -218,11 +212,8 @@ namespace WindowsFormsApp18
             resultText += "\n\n7. Worst season, its amount and its year:";
             resultText += " The " + res.WorstSeason.ToString() + " season ";
             resultText += " of the year " + res.WorstSeasonYear.ToString();
-            resultText += " with the amount of " + res.WorstSeasonAmount.ToString();
-            //Result 8
-            resultText += "\n\n8. Droughts information: This is a bonus part, we'll see if we do it later on.\n\n\n";
-
-
+            resultText += " with the amount of " + res.WorstSeasonAmount.ToString()+"\n\n";
+  
             return resultText;
         }
     }

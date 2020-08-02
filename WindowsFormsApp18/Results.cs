@@ -20,7 +20,7 @@ namespace WindowsFormsApp18
         public double ExecutionTime { get; private set; }
         //Result 1
         public double YearlyAvg { get; set; }
-        public int ResultWeight { get; private set; }
+        public int Weight { get; private set; }
         //Result 2
         public int BestYear { get; set; }
         public int BestYearAmount { get; set; }
@@ -47,14 +47,11 @@ namespace WindowsFormsApp18
         public int WorstSeasonIndex { get; set; }
         public int WorstSeasonYear { get; set; }
         public int WorstSeasonAmount { get; set; }
-        //Result 8
 
-
+        //Construct - all calculations are done here using methods from DataFunc.
         public Results(DataTable pdt)
         {
-            var watch = System.Diagnostics.Stopwatch.StartNew(); //Start a timer for calculations.
-
-            this.ResultWeight = pdt.Rows.Count; //How many lines table has, for usage in comparison for average.
+            this.Weight = pdt.Rows.Count; //How many lines table has, for usage in comparison for average (weight of result).
             this.YearlyAvg = DataFunc.TotalYearlyAvg(pdt); //Calculate it here, this is not an array so one line is enough.
 
             int[] bestYearResultsArray = DataFunc.BestYear(pdt); //Calculate result array once for usage in the next lines.
@@ -88,50 +85,67 @@ namespace WindowsFormsApp18
             this.WorstSeason = seasonNames[WorstSeasonIndex];
             this.WorstSeasonYear = worstSeasonResultArray[1];
             this.WorstSeasonAmount = worstSeasonResultArray[2];
-
-            watch.Stop(); //End timer for calculation
-            var elapsedMs = watch.ElapsedMilliseconds;
-            this.ExecutionTime = elapsedMs; //Save the elapsed time.
-
-
         }
 
-
-        public Results CompareResults(Results comparison)
+        //This function compares takes the best values of both Results puts them in the comparison.
+        public void CompareResults(Results comparison)
         {
+            //Compare 1 - Yearly Avarage
+            comparison.YearlyAvg = (this.YearlyAvg * this.Weight + comparison.YearlyAvg * comparison.Weight) / (this.Weight + comparison.Weight);
+            comparison.Weight += this.Weight;
 
-            //Result 1
-            this.YearlyAvg = (this.YearlyAvg + comparison.YearlyAvg / (1));
+            //Compare 2 - Best year
+            if (this.BestYearAmount >= comparison.BestYearAmount)
+            {  
+                comparison.BestYear = this.BestYear;
+                comparison.BestYearAmount = this.BestYearAmount;
+            }
 
-            ////Result 2
-            //this.BestYear
-            //this.BestYearAmount
-            ////Result 3
-            //this.BestMonth
-            //this.BestMonthIndex
-            //this.BestMonthYear
-            //this.BestMonthAmount
-            ////Result 4
-            //this.WorstYear
-            //this.WorstYearAmount
-            ////Result 5
-            //this.WorstMonth 
-            //this.WorstMonthIndex
-            //this.WorstMonthYear
-            //this.WorstMonthAmount 
-            ////Result 6
-            //this.BestSeason
-            //this.BestSeasonIndex
-            //this.BestSeasonYear
-            //this.BestSeasonAmount
-            ////Result 7
-            //this.WorstSeason 
-            //this.WorstSeasonIndex
-            //this.WorstSeasonYear
-            //this.WorstSeasonAmount
+            //Compare 3 - Best Month
+            if (this.BestMonthAmount >= comparison.BestMonthAmount)
+            {
+                comparison.BestMonth = this.BestMonth;
+                comparison.BestMonthIndex = this.BestMonthIndex;
+                comparison.BestMonthYear = this.BestMonthYear;
+                comparison.BestMonthAmount = this.BestMonthAmount;
+            }
+
+            //Compare 4 - Worst Year
+            if (this.WorstYearAmount <= comparison.WorstYearAmount)
+            {
+                comparison.WorstYear = this.WorstYear;
+                comparison.WorstYearAmount = this.WorstYearAmount;
+            }
+
+            //Compare 5 - Worst Month
+            if (this.WorstMonthAmount <= comparison.WorstMonthAmount)
+            {
+                comparison.WorstMonth = this.WorstMonth;
+                comparison.WorstMonthIndex = this.WorstMonthIndex;
+                comparison.WorstMonthYear = this.WorstMonthYear;
+                comparison.WorstMonthAmount = this.WorstMonthAmount;
+            }
+
+            //Compare 6 - Best Season
+            if (this.BestSeasonAmount >= comparison.BestSeasonAmount)
+            {
+                comparison.BestSeason = this.BestSeason;
+                comparison.BestSeasonIndex = this.BestSeasonIndex;
+                comparison.BestSeasonYear = this.BestSeasonYear;
+                comparison.BestSeasonAmount = this.BestSeasonAmount;
+            }
 
 
-            return this;
+            //Compare 7 - Worst Season
+            if (this.WorstSeasonAmount <= comparison.WorstSeasonAmount)
+            {
+                comparison.WorstSeason = this.WorstSeason;
+                comparison.WorstSeasonIndex = this.WorstSeasonIndex;
+                comparison.WorstSeasonYear = this.WorstSeasonYear;
+                comparison.WorstSeasonAmount = this.WorstSeasonAmount;
+
+            }
+
         }
     }
 }

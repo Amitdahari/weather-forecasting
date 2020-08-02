@@ -101,32 +101,18 @@ namespace WindowsFormsApp18
         {
             try
             {
+                var watch = System.Diagnostics.Stopwatch.StartNew(); //Start a timer for calculations.
+                resultsTextBox.Text = ""; //Clear current text in text box.
 
                 threads = (int)threadsTextBox.Value;
-                resultsTextBox.Text = DataFunc.ResultsText(MapRecuce.MainMapReduceThread(processingData, threads)); //This is what we'll actually use
+                Results res = MapReduce.MainMapReduceThread(processingData, threads);
+                resultsTextBox.Text = DataFunc.ResultsText(res);
 
-                /*************************************************************************************************/
-                /*The text here will be probably moved to MainMapReduceThreads and the loop will contain threads.*/
+                watch.Stop(); //End timer for calculation
+                var elapsedMs = watch.ElapsedMilliseconds;
 
-                //var watch = System.Diagnostics.Stopwatch.StartNew(); //Start a timer for calculations.
-                //resultsTextBox.Text = ""; //Clear current text in text box.
+                resultsTextBox.Text += "Overall run time: " + elapsedMs.ToString() + " miliseconds.";
 
-                //for (int i = 0; i < threads; i++)
-                //{
-                //    resultsTextBox.Text += "Table " + (i+1).ToString()+" results: ";
-                //    Results res = new Results(MapRecuce.TableSplit(processingData, threads)[i]); //NEEDS THREADS
-                //    resultsTextBox.Text += DataFunc.ResultsText(res); //This is basically not needed, just for us to see. WIll change later.
-                //}
-
-                ///*Add overall result here*/
-
-                //watch.Stop(); //End timer for calculation
-                //var elapsedMs = watch.ElapsedMilliseconds;
-
-                //resultsTextBox.Text += "Overall run time (includes table splitting): " + elapsedMs.ToString();
-
-                /*The text here will be probably moved to MainMapReduceThreads and the loop will contain threads.*/
-                /*************************************************************************************************/
 
             }
             catch (Exception ex)
@@ -145,18 +131,15 @@ namespace WindowsFormsApp18
                 var watch = System.Diagnostics.Stopwatch.StartNew(); //Start a timer for calculations.
                 resultsTextBox.Text = ""; //Clear current text in text box.
 
-                //Results res = new Results(processingData); //This is how it was before.
-
                 //To compare to MR, we'll add the split time into this calculation as well.
-                Results res = new Results(MapRecuce.TableSplit(processingData, threads)[0]); //"Split" the table to 1.
-                //TODO: This ^ line will be changed to work with threads (only one thread here).
+                Results res = new Results(MapReduce.TableSplit(processingData, threads)[0]); //"Split" the table to 1.
 
                 resultsTextBox.Text += DataFunc.ResultsText(res);
 
                 watch.Stop(); //End timer for calculation
                 var elapsedMs = watch.ElapsedMilliseconds;
 
-                resultsTextBox.Text += "Overall run time: " + elapsedMs.ToString();
+                resultsTextBox.Text += "Overall run time: " + elapsedMs.ToString()+" miliseconds.";
             }
             catch (Exception ex)
             {

@@ -161,7 +161,7 @@
             0,
             0});
             this.threadsTextBox.Minimum = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
@@ -169,7 +169,7 @@
             this.threadsTextBox.Size = new System.Drawing.Size(70, 20);
             this.threadsTextBox.TabIndex = 11;
             this.threadsTextBox.Value = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
