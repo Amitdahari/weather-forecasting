@@ -87,7 +87,7 @@ namespace WindowsFormsApp18
 
             if (dt.Rows.Count % divider != 0) // In case we'll have 1 more table than threads, we'll take a bigger chunk size.
             {
-                if(dt.Rows.Count % divider  >  (chunkSize = dt.Rows.Count / divider)/3) //**Condition where bigger chunk size will be better.
+                if(dt.Rows.Count % divider  >  (chunkSize = dt.Rows.Count / divider)/8) //**Condition where bigger chunk size will be better.
                 chunkSize += 1;  //Where it's not worth it, solution is in map.
             }
 
