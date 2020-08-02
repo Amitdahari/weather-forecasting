@@ -6,15 +6,50 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Data.OleDb;
-
+using System.Threading;
 
 namespace WindowsFormsApp18
 {
     public static class MapRecuce
     {
-        public static void MainMapReduceThread(int threadsNumber)
+        
+        private static Thread[] thr;
+        public static void MainMapReduceThread(DataTable dt,int threadsNumber)
+        {
+            Reduce(Map(dt, threadsNumber));
+         //   Merge();
+        }
+        public static Thread[] Map(DataTable dt, int threads)
+        {
+            Results[] res = new Results[threads];
+            thr = new Thread[threads];
+            DataTable[] splitDT = MapRecuce.TableSplit(dt, threads);
+
+                for (int i = 0; i < threads; i++)
+                {
+                   thr[i] = new Thread(() => res[i] = ProcessData(splitDT[i]));
+                }
+
+            return thr;
+
+            
+        }
+        
+        public static Results ProcessData(DataTable dt)
+        {
+            Results res = new Results(dt);
+
+            return res;
+        }
+        public static void Reduce(Thread[] thr)
         {
             
+            
+            for (int i = 0; i < thr.Length; i++)
+            {
+               thr[i].Start();
+               thr[i].Join();
+            }
         }
 
 
@@ -32,6 +67,9 @@ namespace WindowsFormsApp18
             .Select(g => g.Select(x => x.row).CopyToDataTable())
             .ToArray();
         }
+
+
+
 
     }
 }

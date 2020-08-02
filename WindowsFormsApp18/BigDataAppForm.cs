@@ -101,29 +101,29 @@ namespace WindowsFormsApp18
         {
             try
             {
-
+                
                 threads = (int)threadsTextBox.Value;
-                MapRecuce.MainMapReduceThread(threads); //This is what we'll actually use
+                MapRecuce.MainMapReduceThread(processingData,threads); //This is what we'll actually use
 
                 /*************************************************************************************************/
                 /*The text here will be probably moved to MainMapReduceThreads and the loop will contain threads.*/
 
-                var watch = System.Diagnostics.Stopwatch.StartNew(); //Start a timer for calculations.
-                resultsTextBox.Text = ""; //Clear current text in text box.
+                //var watch = System.Diagnostics.Stopwatch.StartNew(); //Start a timer for calculations.
+                //resultsTextBox.Text = ""; //Clear current text in text box.
 
-                for (int i = 0; i < threads; i++)
-                {
-                    resultsTextBox.Text += "Table " + (i+1).ToString()+" results: ";
-                    Results res = new Results(MapRecuce.TableSplit(processingData, threads)[i]); //NEEDS THREADS
-                    resultsTextBox.Text += DataFunc.ResultsText(res); //This is basically not needed, just for us to see. WIll change later.
-                }
+                //for (int i = 0; i < threads; i++)
+                //{
+                //    resultsTextBox.Text += "Table " + (i+1).ToString()+" results: ";
+                //    Results res = new Results(MapRecuce.TableSplit(processingData, threads)[i]); //NEEDS THREADS
+                //    resultsTextBox.Text += DataFunc.ResultsText(res); //This is basically not needed, just for us to see. WIll change later.
+                //}
 
-                /*Add overall result here*/
+                ///*Add overall result here*/
 
-                watch.Stop(); //End timer for calculation
-                var elapsedMs = watch.ElapsedMilliseconds;
+                //watch.Stop(); //End timer for calculation
+                //var elapsedMs = watch.ElapsedMilliseconds;
 
-                resultsTextBox.Text += "Overall run time (includes table splitting): " + elapsedMs.ToString();
+                //resultsTextBox.Text += "Overall run time (includes table splitting): " + elapsedMs.ToString();
 
                 /*The text here will be probably moved to MainMapReduceThreads and the loop will contain threads.*/
                 /*************************************************************************************************/
