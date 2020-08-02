@@ -49,7 +49,7 @@ namespace WindowsFormsApp18
         public int WorstSeasonAmount { get; set; }
         //Result 8
 
-            
+
         public Results(DataTable pdt)
         {
             var watch = System.Diagnostics.Stopwatch.StartNew(); //Start a timer for calculations.
@@ -63,7 +63,7 @@ namespace WindowsFormsApp18
 
             int[] bestMonthResultsArray = DataFunc.BestMonthAndItsYear(pdt); //Calculate result array once for usage in the next lines.
             this.BestMonthIndex = bestMonthResultsArray[0];
-            this.BestMonth = monthNames[BestMonthIndex];            
+            this.BestMonth = monthNames[BestMonthIndex];
             this.BestMonthYear = bestMonthResultsArray[1];
             this.BestMonthAmount = bestMonthResultsArray[2];
 
@@ -85,14 +85,14 @@ namespace WindowsFormsApp18
 
             int[] worstSeasonResultArray = DataFunc.WorstSeasonAndItsYear(pdt); //Calculate result array once for usage in the next lines.
             this.WorstSeasonIndex = worstSeasonResultArray[0];
-            this.WorstSeason = seasonNames[WorstSeasonIndex];            
+            this.WorstSeason = seasonNames[WorstSeasonIndex];
             this.WorstSeasonYear = worstSeasonResultArray[1];
             this.WorstSeasonAmount = worstSeasonResultArray[2];
 
             watch.Stop(); //End timer for calculation
             var elapsedMs = watch.ElapsedMilliseconds;
             this.ExecutionTime = elapsedMs; //Save the elapsed time.
-            
+
 
         }
 
@@ -100,8 +100,8 @@ namespace WindowsFormsApp18
         public Results CompareResults(Results comparison)
         {
 
-        //Result 1
-        this.YearlyAvg = (this.YearlyAvg*this.ResultWeight + comparison.YearlyAvg*comparison.ResultWeight / (this.ResultWeight+comparison.ResultWeight));
+            //Result 1
+            this.YearlyAvg = (this.YearlyAvg + comparison.YearlyAvg / (1));
 
             ////Result 2
             //this.BestYear
@@ -132,6 +132,6 @@ namespace WindowsFormsApp18
 
 
             return this;
-    }
+        }
     }
 }

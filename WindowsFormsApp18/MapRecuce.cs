@@ -13,11 +13,11 @@ namespace WindowsFormsApp18
 {
     public static class MapRecuce
     {
-        
+
         private static Thread[] thr; //The existing "computers" as threads.
         private static Results[] finalRes; //What the results will give us.
 
-        public static Results MainMapReduceThread(DataTable dt,int threadsNumber)
+        public static Results MainMapReduceThread(DataTable dt, int threadsNumber)
         {
 
             Map(dt, threadsNumber);
@@ -36,7 +36,7 @@ namespace WindowsFormsApp18
             for (int i = 0; i < threads; i++)
             {
                 int temp = i;
-                thr[i] = new Thread(() => finalRes[temp] = ProcessData(splitDT[temp]));                
+                thr[i] = new Thread(() => finalRes[temp] = ProcessData(splitDT[temp]));
             }
 
             Debug.WriteLine("\n Results length" + finalRes.Length.ToString());
@@ -64,10 +64,10 @@ namespace WindowsFormsApp18
 
         public static Results Merge()
         {
-            int lastIndex=0;
-            for (int i = 0; i <= finalRes.Length-1; i++)
+            int lastIndex = 0;
+            for (int i = 0; i <= finalRes.Length - 1; i++)
             {
-                finalRes[i]=finalRes[i].CompareResults(finalRes[i + 1]);
+                finalRes[i] = finalRes[i].CompareResults(finalRes[i + 1]);
                 lastIndex = i;
             }
 
@@ -75,7 +75,7 @@ namespace WindowsFormsApp18
         }
 
         //Splits the DataTable into few DataTables inorder to process each table on each Thread
-        public static DataTable[] TableSplit(DataTable dt, int divider) 
+        public static DataTable[] TableSplit(DataTable dt, int divider)
         {
 
             int chunkSize = dt.Rows.Count / divider; // Number of divided chunkes from the table
