@@ -32,6 +32,7 @@ namespace WindowsFormsApp18
         //Opens a dialog box to select Excel file 
         private void choose_csv_button_Click(object sender, EventArgs e)
         {
+            openFileDialog1.InitialDirectory = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())); //Default
             openFileDialog1.Filter = "XLSX files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
             openFileDialog1.ShowDialog();
         }
