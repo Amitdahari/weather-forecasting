@@ -41,6 +41,7 @@
             this.get_result_button = new System.Windows.Forms.Button();
             this.threadsLabel = new System.Windows.Forms.Label();
             this.threadsTextBox = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inputGrid)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -59,21 +60,21 @@
             // 
             // process_button
             // 
-            this.process_button.Location = new System.Drawing.Point(96, 696);
+            this.process_button.Location = new System.Drawing.Point(25, 520);
             this.process_button.Name = "process_button";
-            this.process_button.Size = new System.Drawing.Size(89, 31);
+            this.process_button.Size = new System.Drawing.Size(146, 31);
             this.process_button.TabIndex = 1;
-            this.process_button.Text = "Process";
+            this.process_button.Text = "Regular Processing";
             this.process_button.UseVisualStyleBackColor = true;
             this.process_button.Click += new System.EventHandler(this.process_button_Click);
             // 
             // map_reduce_button
             // 
-            this.map_reduce_button.Location = new System.Drawing.Point(443, 696);
+            this.map_reduce_button.Location = new System.Drawing.Point(672, 520);
             this.map_reduce_button.Name = "map_reduce_button";
-            this.map_reduce_button.Size = new System.Drawing.Size(110, 31);
+            this.map_reduce_button.Size = new System.Drawing.Size(146, 31);
             this.map_reduce_button.TabIndex = 2;
-            this.map_reduce_button.Text = "Map Reduce";
+            this.map_reduce_button.Text = "MapReduce Processing";
             this.map_reduce_button.UseVisualStyleBackColor = true;
             this.map_reduce_button.Click += new System.EventHandler(this.map_reduce_button_Click);
             // 
@@ -96,7 +97,7 @@
             this.groupBox_data.Controls.Add(this.inputGrid);
             this.groupBox_data.Location = new System.Drawing.Point(25, 61);
             this.groupBox_data.Name = "groupBox_data";
-            this.groupBox_data.Size = new System.Drawing.Size(796, 438);
+            this.groupBox_data.Size = new System.Drawing.Size(796, 429);
             this.groupBox_data.TabIndex = 7;
             this.groupBox_data.TabStop = false;
             this.groupBox_data.Text = "Data ";
@@ -108,16 +109,18 @@
             this.inputGrid.AllowUserToResizeColumns = false;
             this.inputGrid.AllowUserToResizeRows = false;
             this.inputGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.inputGrid.Location = new System.Drawing.Point(73, 20);
+            this.inputGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inputGrid.Location = new System.Drawing.Point(3, 16);
             this.inputGrid.Name = "inputGrid";
             this.inputGrid.ReadOnly = true;
-            this.inputGrid.Size = new System.Drawing.Size(642, 412);
+            this.inputGrid.Size = new System.Drawing.Size(790, 410);
             this.inputGrid.TabIndex = 8;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.resultsTextBox);
-            this.groupBox1.Location = new System.Drawing.Point(25, 505);
+            this.groupBox1.Controls.Add(this.get_result_button);
+            this.groupBox1.Location = new System.Drawing.Point(28, 557);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(796, 170);
             this.groupBox1.TabIndex = 8;
@@ -127,26 +130,27 @@
             // resultsTextBox
             // 
             this.resultsTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.resultsTextBox.Location = new System.Drawing.Point(73, 19);
+            this.resultsTextBox.Location = new System.Drawing.Point(6, 19);
             this.resultsTextBox.Name = "resultsTextBox";
             this.resultsTextBox.ReadOnly = true;
-            this.resultsTextBox.Size = new System.Drawing.Size(642, 145);
+            this.resultsTextBox.Size = new System.Drawing.Size(703, 145);
             this.resultsTextBox.TabIndex = 0;
             this.resultsTextBox.Text = "";
             // 
             // get_result_button
             // 
-            this.get_result_button.Location = new System.Drawing.Point(651, 696);
+            this.get_result_button.Location = new System.Drawing.Point(715, 19);
             this.get_result_button.Name = "get_result_button";
-            this.get_result_button.Size = new System.Drawing.Size(89, 31);
+            this.get_result_button.Size = new System.Drawing.Size(75, 145);
             this.get_result_button.TabIndex = 5;
-            this.get_result_button.Text = "Import to .txt";
+            this.get_result_button.Text = "Import to Text File";
             this.get_result_button.UseVisualStyleBackColor = true;
+            this.get_result_button.Click += new System.EventHandler(this.get_result_button_Click);
             // 
             // threadsLabel
             // 
             this.threadsLabel.AutoSize = true;
-            this.threadsLabel.Location = new System.Drawing.Point(294, 705);
+            this.threadsLabel.Location = new System.Drawing.Point(523, 529);
             this.threadsLabel.Name = "threadsLabel";
             this.threadsLabel.Size = new System.Drawing.Size(69, 13);
             this.threadsLabel.TabIndex = 10;
@@ -154,7 +158,7 @@
             // 
             // threadsTextBox
             // 
-            this.threadsTextBox.Location = new System.Drawing.Point(367, 703);
+            this.threadsTextBox.Location = new System.Drawing.Point(596, 527);
             this.threadsTextBox.Maximum = new decimal(new int[] {
             131072,
             0,
@@ -174,22 +178,35 @@
             0,
             0});
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(25, 493);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(537, 13);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Choose between regular processing (through standard means), or MapReduce processi" +
+    "ng using multiple threads.";
+            // 
             // BigDataAppForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(852, 739);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.threadsTextBox);
-            this.Controls.Add(this.threadsLabel);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox_data);
-            this.Controls.Add(this.get_result_button);
+            this.Controls.Add(this.threadsLabel);
             this.Controls.Add(this.view_File_path);
+            this.Controls.Add(this.choose_csv_button);
             this.Controls.Add(this.map_reduce_button);
             this.Controls.Add(this.process_button);
-            this.Controls.Add(this.choose_csv_button);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "BigDataAppForm";
-            this.Text = "Form1";
+            this.Text = "Map/Reduce Main App Form";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox_data.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.inputGrid)).EndInit();
@@ -215,6 +232,7 @@
         private System.Windows.Forms.Button get_result_button;
         private System.Windows.Forms.Label threadsLabel;
         private System.Windows.Forms.NumericUpDown threadsTextBox;
+        private System.Windows.Forms.Label label1;
     }
 }
 

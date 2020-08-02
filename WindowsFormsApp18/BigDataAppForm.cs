@@ -24,7 +24,9 @@ namespace WindowsFormsApp18
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            this.process_button.Enabled = false;
+            this.map_reduce_button.Enabled = false;
+            this.get_result_button.Enabled = false;
         }
 
         //Opens a dialog box to select Excel file 
@@ -44,8 +46,11 @@ namespace WindowsFormsApp18
                 processingData = dt.Copy();//Take the table as our new DT for calculations.
                 inputGrid.DataSource = dt; //Displaying DT on the DataGrid.
                 threadsTextBox.Maximum = dt.Rows.Count / 2; //Making sure every split table is at least 2 rows. (Otherwise division by 0).
-
                 this.view_File_path.Text = openFileDialog1.FileName;
+                this.process_button.Enabled = true;
+                this.map_reduce_button.Enabled = true;
+                this.get_result_button.Enabled = true;
+
             }
             catch (Exception ex)
             {
@@ -146,6 +151,24 @@ namespace WindowsFormsApp18
                 MessageBox.Show(ex.Message);
             }
         }
-        
+
+        //Saves the results from resultsTextBox into a Text file.
+        private void get_result_button_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                saveFileDialog1.Filter = "Text files|*.txt";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    File.WriteAllText(saveFileDialog1.FileName, resultsTextBox.Text);
+                    MessageBox.Show("File Contents were saved!", "Notice", MessageBoxButtons.OK);
+                    saveFileDialog1.FileName = "";
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
