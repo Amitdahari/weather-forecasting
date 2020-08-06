@@ -12,7 +12,7 @@ using System.Data.OleDb;
 
 /*Important: In case of an 12.0 error, download Microsoft Access Database Engine Redistributable 2010.*/
 
-namespace WindowsFormsApp18
+namespace WeatherForecastingOAZ
 {
     /*Main class using a Windows Form*/
     public partial class BigDataAppForm : Form
@@ -33,7 +33,13 @@ namespace WindowsFormsApp18
         //Opens a dialog box to select Excel file 
         private void choose_csv_button_Click(object sender, EventArgs e)
         {
-            openFileDialog1.InitialDirectory = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())); //Default
+
+            openFileDialog1.InitialDirectory = System.IO.Path.GetDirectoryName(Application.ExecutablePath); //Default folder=App folder.
+
+            if (openFileDialog1.InitialDirectory.Substring(openFileDialog1.InitialDirectory.Length - 5) == "Debug") //If in Debug folder, change to project folder.
+            {
+                openFileDialog1.InitialDirectory = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())); //Default 
+            }
             openFileDialog1.Filter = "XLSX files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
             openFileDialog1.ShowDialog();
         }
@@ -47,7 +53,7 @@ namespace WindowsFormsApp18
                 DataTable dt = LoadWorksheetInDataTable(excelFile);
                 processingData = dt.Copy();//Take the table as our new DT for calculations.
                 inputGrid.DataSource = dt; //Displaying DT on the DataGrid.
-                threadsTextBox.Maximum = dt.Rows.Count / 3; //Making sure every split table is at least 2 rows. (Otherwise division by 0).
+                threadsTextBox.Maximum = 16; //Normal PCs don't have more than 16 threads usually...
                 this.view_File_path.Text = openFileDialog1.FileName;
                 this.process_button.Enabled = true;
                 this.map_reduce_button.Enabled = true;

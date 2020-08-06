@@ -5,7 +5,7 @@ using System.Text;
 using System.Data;
 
 
-namespace WindowsFormsApp18
+namespace WeatherForecastingOAZ
 {
     public class Results
     {

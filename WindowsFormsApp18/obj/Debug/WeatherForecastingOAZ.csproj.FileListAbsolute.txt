@@ -1,0 +1,27 @@
+C:\Users\User\Desktop\Studies\Big Data\הגשת הפרוייקט - עמית אושר צמח\Weather Forecasting - Osher Amit Zemach\WindowsFormsApp18\bin\Debug\Weather Forecasting - OsherAmitZemach.exe
+C:\Users\User\Desktop\Studies\Big Data\הגשת הפרוייקט - עמית אושר צמח\Weather Forecasting - Osher Amit Zemach\WindowsFormsApp18\bin\Debug\Weather Forecasting - OsherAmitZemach.pdb
+C:\Users\User\Desktop\Studies\Big Data\הגשת הפרוייקט - עמית אושר צמח\Weather Forecasting - Osher Amit Zemach\WindowsFormsApp18\obj\Debug\WeatherForecastingOAZ.BigDataAppForm.resources
+C:\Users\User\Desktop\Studies\Big Data\הגשת הפרוייקט - עמית אושר צמח\Weather Forecasting - Osher Amit Zemach\WindowsFormsApp18\obj\Debug\WeatherForecastingOAZ.Properties.Resources.resources
+C:\Users\User\Desktop\Studies\Big Data\הגשת הפרוייקט - עמית אושר צמח\Weather Forecasting - Osher Amit Zemach\WindowsFormsApp18\obj\Debug\WeatherForecastingOAZ.csproj.GenerateResource.cache
+C:\Users\User\Desktop\Studies\Big Data\הגשת הפרוייקט - עמית אושר צמח\Weather Forecasting - Osher Amit Zemach\WindowsFormsApp18\obj\Debug\WeatherForecastingOAZ.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Studies\Big Data\הגשת הפרוייקט - עמית אושר צמח\Weather Forecasting - Osher Amit Zemach\WindowsFormsApp18\obj\Debug\Weather Forecasting - OsherAmitZemach.exe
+C:\Users\User\Desktop\Studies\Big Data\הגשת הפרוייקט - עמית אושר צמח\Weather Forecasting - Osher Amit Zemach\WindowsFormsApp18\obj\Debug\Weather Forecasting - OsherAmitZemach.pdb
+C:\Users\User\Desktop\Studies\Big Data\הגשת הפרוייקט - עמית אושר צמח\Weather Forecasting - Osher Amit Zemach\WindowsFormsApp18\obj\Debug\WeatherForecastingOAZ.csprojAssemblyReference.cache
+C:\Users\User\Desktop\Studies\Big Data\הגשת הפרוייקט - עמית אושר צמח\Code\Weather Forecasting - Osher Amit Zemach\WindowsFormsApp18\bin\Debug\Weather Forecasting - OsherAmitZemach.exe
+C:\Users\User\Desktop\Studies\Big Data\הגשת הפרוייקט - עמית אושר צמח\Code\Weather Forecasting - Osher Amit Zemach\WindowsFormsApp18\bin\Debug\Weather Forecasting - OsherAmitZemach.pdb
+C:\Users\User\Desktop\Studies\Big Data\הגשת הפרוייקט - עמית אושר צמח\Code\Weather Forecasting - Osher Amit Zemach\WindowsFormsApp18\obj\Debug\WeatherForecastingOAZ.csprojAssemblyReference.cache
+C:\Users\User\Desktop\Studies\Big Data\הגשת הפרוייקט - עמית אושר צמח\Code\Weather Forecasting - Osher Amit Zemach\WindowsFormsApp18\obj\Debug\WeatherForecastingOAZ.BigDataAppForm.resources
+C:\Users\User\Desktop\Studies\Big Data\הגשת הפרוייקט - עמית אושר צמח\Code\Weather Forecasting - Osher Amit Zemach\WindowsFormsApp18\obj\Debug\WeatherForecastingOAZ.Properties.Resources.resources
+C:\Users\User\Desktop\Studies\Big Data\הגשת הפרוייקט - עמית אושר צמח\Code\Weather Forecasting - Osher Amit Zemach\WindowsFormsApp18\obj\Debug\WeatherForecastingOAZ.csproj.GenerateResource.cache
+C:\Users\User\Desktop\Studies\Big Data\הגשת הפרוייקט - עמית אושר צמח\Code\Weather Forecasting - Osher Amit Zemach\WindowsFormsApp18\obj\Debug\WeatherForecastingOAZ.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Studies\Big Data\הגשת הפרוייקט - עמית אושר צמח\Code\Weather Forecasting - Osher Amit Zemach\WindowsFormsApp18\obj\Debug\Weather Forecasting - OsherAmitZemach.exe
+C:\Users\User\Desktop\Studies\Big Data\הגשת הפרוייקט - עמית אושר צמח\Code\Weather Forecasting - Osher Amit Zemach\WindowsFormsApp18\obj\Debug\Weather Forecasting - OsherAmitZemach.pdb
+C:\Users\USER\source\repos\Weather Forecasting - OsherAmitZemach\WindowsFormsApp18\bin\Debug\Weather Forecasting - OsherAmitZemach.exe
+C:\Users\USER\source\repos\Weather Forecasting - OsherAmitZemach\WindowsFormsApp18\bin\Debug\Weather Forecasting - OsherAmitZemach.pdb
+C:\Users\USER\source\repos\Weather Forecasting - OsherAmitZemach\WindowsFormsApp18\obj\Debug\WeatherForecastingOAZ.csprojAssemblyReference.cache
+C:\Users\USER\source\repos\Weather Forecasting - OsherAmitZemach\WindowsFormsApp18\obj\Debug\WeatherForecastingOAZ.BigDataAppForm.resources
+C:\Users\USER\source\repos\Weather Forecasting - OsherAmitZemach\WindowsFormsApp18\obj\Debug\WeatherForecastingOAZ.Properties.Resources.resources
+C:\Users\USER\source\repos\Weather Forecasting - OsherAmitZemach\WindowsFormsApp18\obj\Debug\WeatherForecastingOAZ.csproj.GenerateResource.cache
+C:\Users\USER\source\repos\Weather Forecasting - OsherAmitZemach\WindowsFormsApp18\obj\Debug\WeatherForecastingOAZ.csproj.CoreCompileInputs.cache
+C:\Users\USER\source\repos\Weather Forecasting - OsherAmitZemach\WindowsFormsApp18\obj\Debug\Weather Forecasting - OsherAmitZemach.exe
+C:\Users\USER\source\repos\Weather Forecasting - OsherAmitZemach\WindowsFormsApp18\obj\Debug\Weather Forecasting - OsherAmitZemach.pdb

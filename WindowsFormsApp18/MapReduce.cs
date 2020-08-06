@@ -8,7 +8,7 @@ using System.Text;
 using System.Data.OleDb;
 using System.Threading;
 
-namespace WindowsFormsApp18
+namespace WeatherForecastingOAZ
 {
     public static class MapReduce
     {

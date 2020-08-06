@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Data.OleDb;
 
-namespace WindowsFormsApp18
+namespace WeatherForecastingOAZ
 {
     /*This class will contain all of the methods we'll use for processing*/
 
@@ -47,8 +47,8 @@ namespace WindowsFormsApp18
         }
 
 
-        //Support function for 3,5, returns an array of month amounts sorted by years.
-        public static double[] AmountsByMonth(DataTable dt, int month)
+        //Support function for 3,5, returns an array of a certain month amount sorted by years.
+        public static double[] AmountsByMonth(DataTable dt, int month)  
         {
             int totalmonths = dt.Rows.Count;
             double[] currentMonthArray = new double[totalmonths];
@@ -59,7 +59,7 @@ namespace WindowsFormsApp18
         }
 
         // Output Result 3, best month and on what year.
-        public static int[] BestMonthAndItsYear(DataTable dt)
+        public static int[] BestMonthAndItsYear(DataTable dt) 
         {
             int bestMonthIndex = 0;
             int bestMonthsYearIndex = 0;
@@ -114,8 +114,8 @@ namespace WindowsFormsApp18
             return result;
         }
 
-        //Support function for output 6, 7.
-        public static double[] AmountsBySeason(DataTable dt, int season)
+        //Support function for output 6, 7, returns an array of a certain season amount sorted by years.
+        public static double[] AmountsBySeason(DataTable dt, int season) 
         {
             int[,] seasonMonths = { { 12, 1, 2 }, { 3, 4, 5 }, { 6, 7, 8 }, { 9, 10, 11 } };
             int totalseasons = dt.Rows.Count;
@@ -193,7 +193,7 @@ namespace WindowsFormsApp18
             resultText += "\n\n3. Best month, its amount and its year:";
             resultText += " The month " + res.BestMonth.ToString();
             resultText += " of the year " + res.BestMonthYear.ToString();
-            resultText += " with the amount of" + res.BestMonthAmount.ToString();
+            resultText += " with the amount of " + res.BestMonthAmount.ToString();
             //Result 4
             resultText += "\n\n4. Worst year and its amount:";
             resultText += " The year " + res.WorstYear.ToString();
