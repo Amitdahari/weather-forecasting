@@ -108,9 +108,9 @@ namespace WeatherForecastingOAZ
                 }
             }
 
-            int bestMonth = worstMonthIndex;
-            int bestMonthsYear = Convert.ToInt32(dt.Rows[worstMonthsYearIndex].ItemArray[0]);
-            int[] result = { bestMonth, bestMonthsYear, minValue };
+            int worstMonth = worstMonthIndex;
+            int worstMonthsYear = Convert.ToInt32(dt.Rows[worstMonthsYearIndex].ItemArray[0]);
+            int[] result = { worstMonth, worstMonthsYear, minValue };
             return result;
         }
 
