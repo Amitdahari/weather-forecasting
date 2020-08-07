@@ -168,9 +168,9 @@ namespace WeatherForecastingOAZ
                     }
                 }
 
-                int bestSeason = worstSeasonIndex;
-                int bestSeasonsYear = Convert.ToInt32(dt.Rows[worstSeasonsYearIndex].ItemArray[0]);
-                int[] result = { bestSeason, bestSeasonsYear, minValue };
+                int worstSeason = worstSeasonIndex;
+                int worstSeasonsYear = Convert.ToInt32(dt.Rows[worstSeasonsYearIndex].ItemArray[0]);
+                int[] result = { worstSeason, worstSeasonsYear, minValue };
                 return result;
             
         }
